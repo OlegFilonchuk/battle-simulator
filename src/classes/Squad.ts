@@ -8,9 +8,9 @@ export default class Squad {
   public members: (Soldier | Vehicle)[];
 
   constructor() {
-    const result = [];
+    const result: (Soldier | Vehicle)[] = [];
     for (let i = 0; i < this.membersCount; i++) {
-      result.push(new Soldier());
+      result.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());
     }
     this.members = result;
   }

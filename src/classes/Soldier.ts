@@ -15,6 +15,7 @@ export default class Soldier extends Unit {
   }
 
   attack: () => void = () => {
+    console.log('soldier attacks!');
     this.experience++;
   };
 

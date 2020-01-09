@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Vehicle from './classes/Vehicle';
-import { random } from './utils/helpers';
+import Squad from './classes/Squad';
 
 const App: React.FC = () => {
-  const s1 = new Vehicle();
+  const s1 = new Squad();
 
   const attackHandler = () => {
     s1.attack();
