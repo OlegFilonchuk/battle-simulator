@@ -1,8 +1,9 @@
 import * as React from 'react';
-import Squad from './classes/Squad';
+import Vehicle from './classes/Vehicle';
+import { random } from './utils/helpers';
 
 const App: React.FC = () => {
-  const s1 = new Squad();
+  const s1 = new Vehicle();
 
   const attackHandler = () => {
     s1.attack();
@@ -10,7 +11,7 @@ const App: React.FC = () => {
   };
 
   const getAttackedHandler = () => {
-    s1.getAttacked(5);
+    s1.getAttacked(10);
     setTimeout(() => console.log(s1), 50);
   };
 

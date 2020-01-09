@@ -4,7 +4,7 @@ export const geometricAverage: (arg: number[]) => number = (arg) => {
 };
 
 export const random: (min: number, max: number) => number = (min, max) =>
-  Math.floor(min + Math.random() * (max - min) + 1);
+  Math.floor(min + Math.random() * (max - min + 1));
 
 export const sum = (arr) => arr.reduce((acc, curr) => acc + curr);
 

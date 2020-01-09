@@ -3,16 +3,19 @@ import { average, geometricAverage, random, sum } from '../utils/helpers';
 import Soldier from './Soldier';
 
 export default class Vehicle extends Unit {
-  public operatorsCount = random(1, 3);
+  public operatorsCount: number = random(1, 3);
 
-  public recharge = random(1000, 2000);
+  public recharge: number = random(1000, 2000);
 
-  public get operators(): Soldier[] {
+  public operators: Soldier[];
+
+  constructor() {
+    super();
     const result: Soldier[] = [];
     for (let i = 0; i < this.operatorsCount; i++) {
       result.push(new Soldier());
     }
-    return result;
+    this.operators = result;
   }
 
   public get totalHealth(): number {
@@ -35,9 +38,18 @@ export default class Vehicle extends Unit {
 
   attack: () => void = () => {
     console.log('vehicle attacks!');
+    this.operators.forEach((item) => item.attack());
   };
 
-  getAttacked: () => void = () => {
+  getAttacked: (damage: number) => void = (damage) => {
     console.log('vehicle under attack!');
+    this.health -= damage * 0.6;
+
+    // TODO: add 20% to random operator
+    const lastDamage = (damage * 0.2) / this.operators.length;
+    this.operators.forEach((item) => item.getAttacked(lastDamage));
+    this.operators[random(0, this.operators.length - 1)].getAttacked(
+      damage * 0.2,
+    );
   };
 }

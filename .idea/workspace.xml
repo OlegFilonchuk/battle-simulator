@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5cb8065b-3375-4d23-a517-fec4ca3c145c" name="Default Changelist" comment="" />
+    <list default="true" id="5cb8065b-3375-4d23-a517-fec4ca3c145c" name="Default Changelist" comment="add">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/Vehicle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Vehicle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/helpers.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +18,14 @@
         <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -41,7 +54,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="ServiceViewManager">
@@ -67,24 +80,40 @@
       <option name="presentableId" value="Default" />
       <updated>1578556393028</updated>
       <workItem from="1578556395652" duration="4931000" />
+      <workItem from="1578582862231" duration="1630000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="2475" y="215" width="800" height="675" key="#ESLint" timestamp="1578557955517">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="215" width="800" height="675" key="#ESLint/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578557955517" />
+    <state x="2478" y="136" width="794" height="832" key="CommitChangelistDialog2" timestamp="1578583976080">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2478" y="136" width="794" height="832" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578583976080" />
     <state x="2663" y="311" width="424" height="482" key="FileChooserDialogImpl" timestamp="1578558688532">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2663" y="311" width="424" height="482" key="FileChooserDialogImpl/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578558688532" />
-    <state x="2384" y="188" key="SettingsEditor" timestamp="1578557665225">
+    <state x="2384" y="188" key="SettingsEditor" timestamp="1578583373085">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2384" y="188" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578557665225" />
+    <state x="2384" y="188" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578583373085" />
   </component>
 </project>
