@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import Squad from './classes/Squad';
 import { createSquadAction } from './state/AC';
 import SquadList from './components/SquadList';
 
@@ -10,7 +9,7 @@ const App: FC = () => {
   const dispatch: Dispatch = useDispatch();
 
   const handleClick: () => void = () => {
-    dispatch(createSquadAction(new Squad(`squad${counter}`)));
+    dispatch(createSquadAction(`squad${counter}`));
     counter++;
   };
 

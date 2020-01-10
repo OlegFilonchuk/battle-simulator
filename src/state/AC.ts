@@ -11,19 +11,13 @@ type UpdateSquadAction = Action & {
   type: typeof UPDATE_SQUAD;
 };
 
-export const createSquadAction: ActionCreator<CreateSquadAction> = (squad) => ({
+export const createSquadAction: ActionCreator<CreateSquadAction> = (name) => ({
   type: CREATE_SQUAD,
   payload: {
-    squad,
+    name,
   },
 });
 
-export const updateSquadAction: ActionCreator<UpdateSquadAction> = (
-  id,
-  newState,
-) => ({
+export const updateSquadAction: ActionCreator<UpdateSquadAction> = () => ({
   type: UPDATE_SQUAD,
-  payload: {
-    newState,
-  },
 });

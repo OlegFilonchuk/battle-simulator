@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import SquadComp from './SquadComp';
-import Squad from '../classes/Squad';
+import { SquadState } from '../utils/types';
 
 const SquadList: FC = () => {
-  const squads: Squad[] = useSelector((state) => state.squads);
+  const squads: SquadState = useSelector((state) => state.squads);
   return (
-    <ul>
+    <ul style={{ display: 'flex' }}>
       {Object.values(squads).map((item) => (
         <li key={item.name}>
           <SquadComp squad={item} />
