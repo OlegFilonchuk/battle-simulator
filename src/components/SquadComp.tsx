@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import Squad from '../classes/Squad';
-import { updateSquadAction } from '../state/AC';
+import { changeTargetAction, updateSquadAction } from '../state/AC';
 import Soldier from '../classes/Soldier';
 import SoldierComp from './SoldierComp';
 import VehicleComp from './VehicleComp';
@@ -25,6 +25,7 @@ const SquadComp: FC<Props> = ({
   },
 }) => {
   const dispatch: Dispatch = useDispatch();
+  const targets = useSelector((state) => Object.values(state.squads));
 
   const handleAttack = () => {
     attack();
@@ -36,12 +37,26 @@ const SquadComp: FC<Props> = ({
     dispatch(updateSquadAction());
   };
 
+  const handleSetTarget = (ev) => {
+    dispatch(changeTargetAction(name, ev.target.value));
+  };
+
   return (
     <div style={{ background: 'skyblue', padding: '1em', margin: '1em' }}>
       <h2>{name}</h2>
       <div>{`Members count: ${membersCount}`}</div>
       <div>{`attackSuccess: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
       <div>{`damage: ${damage}`}</div>
+
+      <select name="target" onChange={handleSetTarget}>
+        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+        <option value="">Select a target</option>
+        {targets.map((item) => (
+          <option key={item.name} value={item.name}>
+            {item.name}
+          </option>
+        ))}
+      </select>
 
       <button type="button" onClick={handleAttack}>
         attack

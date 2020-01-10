@@ -9,6 +9,8 @@ export default class Squad {
 
   public members: (Soldier | Vehicle)[] = [];
 
+  public target: Squad;
+
   constructor(name: string) {
     this.name = name;
     for (let i = 0; i < this.membersCount; i++) {
@@ -40,6 +42,7 @@ export default class Squad {
 
   attack: () => void = () => {
     this.members.forEach((item) => item.attack());
+    this.target.getAttacked(10);
   };
 
   getAttacked: (totalDamage: number) => void = (totalDamage) => {
