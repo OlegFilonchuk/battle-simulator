@@ -2,6 +2,7 @@ import { Reducer } from 'redux';
 import { CHANGE_TARGET, CREATE_SQUAD, UPDATE_SQUAD } from './AC';
 import { SquadState } from '../utils/types';
 import Squad from '../classes/Squad';
+import { random } from '../utils/helpers';
 
 const initialState: SquadState = {};
 
@@ -10,7 +11,7 @@ const squadReducer: Reducer = (state: SquadState = initialState, action) => {
 
   switch (type) {
     case CREATE_SQUAD:
-      state[payload.name] = new Squad(payload.name);
+      state[payload.name] = new Squad(payload.name, random(5, 10));
       return { ...state };
 
     case UPDATE_SQUAD:

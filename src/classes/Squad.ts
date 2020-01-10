@@ -5,14 +5,15 @@ import Vehicle from './Vehicle';
 export default class Squad {
   public name: string;
 
-  public membersCount: number = random(5, 10);
+  public membersCount: number; /* = random(5, 10); */
 
   public members: (Soldier | Vehicle)[] = [];
 
   public target: Squad;
 
-  constructor(name: string) {
+  constructor(name: string, membersCount) {
     this.name = name;
+    this.membersCount = membersCount
     for (let i = 0; i < this.membersCount; i++) {
       this.members.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());
     }
@@ -41,6 +42,7 @@ export default class Squad {
     if (!this.target?.isActive || !this.isActive) return;
 
     if (this.attackSuccess < this.target.attackSuccess) return;
+    console.log(`${this.name} deals ${this.damage} damage!`);
 
     this.members.forEach((item) => item.attack());
     this.target.getAttacked(this.damage);
