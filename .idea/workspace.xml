@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5cb8065b-3375-4d23-a517-fec4ca3c145c" name="Default Changelist" comment="add">
-      <change beforePath="$PROJECT_DIR$/.idea/codestream.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codestream.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/AC.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Soldier.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Soldier.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/Squad.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/Squad.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +22,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -61,7 +65,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -114,6 +118,10 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added vehicle get attacked mechanics" />
+    <option name="LAST_COMMIT_MESSAGE" value="added vehicle get attacked mechanics" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="555" y="215" width="800" height="684" key="#Configure_Path_Variables" timestamp="1578595595617">
       <screen x="0" y="27" width="1920" height="1053" />
@@ -123,14 +131,15 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="215" width="800" height="675" key="#ESLint/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578557955517" />
-    <state x="555" y="215" width="800" height="684" key="#TypeScript" timestamp="1578596982355">
-      <screen x="0" y="27" width="1920" height="1053" />
-    </state>
-    <state x="555" y="215" width="800" height="684" key="#TypeScript/0.27.1920.1053@0.27.1920.1053" timestamp="1578596982355" />
-    <state x="2478" y="136" width="794" height="832" key="CommitChangelistDialog2" timestamp="1578583976080">
+    <state x="2475" y="193" width="800" height="684" key="#TypeScript" timestamp="1578640433058">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2478" y="136" width="794" height="832" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578583976080" />
+    <state x="555" y="215" width="800" height="684" key="#TypeScript/0.27.1920.1053@0.27.1920.1053" timestamp="1578596982355" />
+    <state x="2475" y="193" key="#TypeScript/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578640433058" />
+    <state x="2478" y="136" width="794" height="832" key="CommitChangelistDialog2" timestamp="1578642161807">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2478" y="136" width="794" height="832" key="CommitChangelistDialog2/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578642161807" />
     <state x="603" y="364" width="733" height="675" key="EditFileWatcherDialog" timestamp="1578595610648">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -144,10 +153,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="775" y="285" width="360" height="544" key="RollbackChangesDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1578596423165" />
-    <state x="464" y="210" width="1229" height="818" key="SettingsEditor" timestamp="1578596993435">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state x="2384" y="188" width="1229" height="818" key="SettingsEditor" timestamp="1578640098961">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="464" y="210" width="1229" height="818" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1578596993435" />
-    <state x="2384" y="188" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578583373085" />
+    <state x="2384" y="188" key="SettingsEditor/1920.0.1920.1080/0.27.1920.1053@1920.0.1920.1080" timestamp="1578640098961" />
   </component>
 </project>

@@ -1,26 +1,20 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import Squad from './classes/Squad';
+import { createSquadAction } from './state/AC';
 
 const App: React.FC = () => {
-  const s1 = new Squad();
+  const dispatch: Dispatch = useDispatch();
 
-  const attackHandler = () => {
-    s1.attack();
-    setTimeout(() => console.log(s1), 50);
-  };
-
-  const getAttackedHandler = () => {
-    s1.getAttacked(10);
-    setTimeout(() => console.log(s1), 50);
+  const handleClick = () => {
+    dispatch(createSquadAction(new Squad()));
   };
 
   return (
     <div>
-      <button type="button" onClick={attackHandler}>
-        attack!
-      </button>
-      <button type="button" onClick={getAttackedHandler}>
-        get attacked!
+      <button type="button" onClick={handleClick}>
+        create squad
       </button>
     </div>
   );
