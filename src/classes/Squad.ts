@@ -18,6 +18,10 @@ export default class Squad {
     }
   }
 
+  public get isActive(): boolean {
+    return this.members.some((item) => item.isActive);
+  }
+
   public get attackSuccess(): number {
     return +geometricAverage(
       this.members.map((item) => item.attackSuccess),
@@ -41,8 +45,9 @@ export default class Squad {
   }
 
   attack: () => void = () => {
+    if (!this.target) return;
     this.members.forEach((item) => item.attack());
-    this.target.getAttacked(10);
+    this.target.getAttacked(1000);
   };
 
   getAttacked: (totalDamage: number) => void = (totalDamage) => {

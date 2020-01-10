@@ -16,6 +16,10 @@ export default class Vehicle extends Unit {
     }
   }
 
+  public get isActive(): boolean {
+    return this.health > 0 && this.operators.some((item) => item.isActive);
+  }
+
   public get totalHealth(): number {
     return average(this.health, ...this.operators.map((item) => item.health));
   }

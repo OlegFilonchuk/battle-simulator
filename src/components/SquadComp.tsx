@@ -16,12 +16,12 @@ const SquadComp: FC<Props> = ({
     name,
     membersCount,
     members,
-    attackSuccess,
     minAttackSuccess,
     maxAttackSuccess,
     damage,
     attack,
     getAttacked,
+    isActive
   },
 }) => {
   const dispatch: Dispatch = useDispatch();
@@ -47,16 +47,19 @@ const SquadComp: FC<Props> = ({
       <div>{`Members count: ${membersCount}`}</div>
       <div>{`attackSuccess: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
       <div>{`damage: ${damage}`}</div>
+      <div>{isActive ? 'active' : 'dead'}</div>
 
-      <select name="target" onChange={handleSetTarget}>
-        {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-        <option value="">Select a target</option>
-        {targets.map((item) => (
-          <option key={item.name} value={item.name}>
-            {item.name}
-          </option>
-        ))}
-      </select>
+      <label htmlFor="target">
+        Select a target
+        <select name="target" onChange={handleSetTarget}>
+          <option value="">None</option>
+          {targets.map((item) => (
+            <option key={item.name} value={item.name}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+      </label>
 
       <button type="button" onClick={handleAttack}>
         attack

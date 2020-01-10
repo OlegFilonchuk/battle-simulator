@@ -4,6 +4,10 @@ import { random } from '../utils/helpers';
 export default class Soldier extends Unit {
   public experience = 0;
 
+  public get isActive(): boolean {
+    return this.health > 0;
+  }
+
   public get attackSuccess(): number {
     const { health, experience } = this;
 

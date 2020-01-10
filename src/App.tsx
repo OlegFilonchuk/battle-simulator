@@ -13,10 +13,6 @@ const App: FC = () => {
     counter++;
   };
 
-  const handleAttackTarget: EventHandler<MouseEvent> = () => {
-    console.log('target attacked');
-  };
-
   return (
     <div>
       <button type="button" onClick={handleCreateSquad}>

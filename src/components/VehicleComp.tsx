@@ -14,18 +14,22 @@ const VehicleComp: FC<Props> = ({
     recharge,
     totalHealth,
     damage,
-    attackSuccess,
+    minAttackSuccess,
+    maxAttackSuccess,
+    isActive,
   },
 }) => {
   return (
     <div style={{ background: 'red', margin: '1em', padding: '1em' }}>
-      <h3>vehicle</h3>
+      <h2>vehicle</h2>
       <div>{`total health: ${totalHealth}%`}</div>
       <div>{`health: ${health}%`}</div>
       <div>{`damage: ${damage}`}</div>
       <div>{`recharge: ${recharge}ms`}</div>
       <div>{`operators count: ${operatorsCount}`}</div>
-      <div>{`attack success: ${attackSuccess}`}</div>
+      <div>{`attack success: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
+      <div>{isActive ? 'active' : 'dead'}</div>
+
       <ul>
         operators:
         {operators.map((item, i) => (
