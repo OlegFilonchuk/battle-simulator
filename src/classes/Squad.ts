@@ -57,8 +57,11 @@ export default class Squad {
 
   attack: () => void = () => {
     if (!this.target?.isActive || !this.isActive) return;
+
+    if (this.attackSuccess < this.target.attackSuccess) return;
+
     this.members.forEach((item) => item.attack());
-    this.target.getAttacked(/* this.damage */ 1000);
+    this.target.getAttacked(this.damage);
   };
 
   getAttacked: (totalDamage: number) => void = async (totalDamage) => {
@@ -66,8 +69,5 @@ export default class Squad {
 
     const damage = totalDamage / this.membersCount;
     await this.members.forEach((item) => item.getAttacked(damage));
-    if (!this.isActive) {
-      const a = console.log('DEAD!');
-    }
   };
 }
