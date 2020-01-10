@@ -17,6 +17,8 @@ const SquadComp: FC<Props> = ({
     membersCount,
     members,
     attackSuccess,
+    minAttackSuccess,
+    maxAttackSuccess,
     damage,
     attack,
     getAttacked,
@@ -38,7 +40,7 @@ const SquadComp: FC<Props> = ({
     <div style={{ background: 'skyblue', padding: '1em', margin: '1em' }}>
       <h2>{name}</h2>
       <div>{`Members count: ${membersCount}`}</div>
-      <div>{`attackSuccess: ${attackSuccess}`}</div>
+      <div>{`attackSuccess: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
       <div>{`damage: ${damage}`}</div>
 
       <button type="button" onClick={handleAttack}>

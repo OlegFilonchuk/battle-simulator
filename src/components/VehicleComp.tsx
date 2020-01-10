@@ -20,7 +20,7 @@ const VehicleComp: FC<Props> = ({
   return (
     <div style={{ background: 'red', margin: '1em', padding: '1em' }}>
       <h3>vehicle</h3>
-      <div>{`total health: ${totalHealth}`}</div>
+      <div>{`total health: ${totalHealth}%`}</div>
       <div>{`health: ${health}%`}</div>
       <div>{`damage: ${damage}`}</div>
       <div>{`recharge: ${recharge}ms`}</div>

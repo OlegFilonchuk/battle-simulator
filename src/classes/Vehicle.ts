@@ -7,15 +7,13 @@ export default class Vehicle extends Unit {
 
   public recharge: number = random(1000, 2000);
 
-  public operators: Soldier[];
+  public operators: Soldier[] = [];
 
   constructor() {
     super();
-    const result: Soldier[] = [];
     for (let i = 0; i < this.operatorsCount; i++) {
-      result.push(new Soldier());
+      this.operators.push(new Soldier());
     }
-    this.operators = result;
   }
 
   public get totalHealth(): number {
@@ -25,27 +23,46 @@ export default class Vehicle extends Unit {
   public get attackSuccess(): number {
     const { health, operators } = this;
 
-    return (
+    return +(
       0.5 *
       (1 + health / 100) *
       geometricAverage(operators.map((item) => item.attackSuccess))
-    );
+    ).toFixed(2);
+  }
+
+  public get minAttackSuccess(): number {
+    const { health, operators } = this;
+
+    return +(
+      0.5 *
+      (1 + health / 100) *
+      geometricAverage(operators.map((item) => item.minAttackSuccess))
+    ).toFixed(2);
+  }
+
+  public get maxAttackSuccess(): number {
+    const { health, operators } = this;
+
+    return +(
+      0.5 *
+      (1 + health / 100) *
+      geometricAverage(operators.map((item) => item.maxAttackSuccess))
+    ).toFixed(2);
   }
 
   public get damage(): number {
-    return 0.1 + sum(this.operators.map((item) => item.experience / 100));
+    return +(
+      0.1 + sum(this.operators.map((item) => item.experience / 100))
+    ).toFixed(2);
   }
 
   attack: () => void = () => {
-    console.log('vehicle attacks!');
     this.operators.forEach((item) => item.attack());
   };
 
   getAttacked: (damage: number) => void = (damage) => {
-    console.log('vehicle under attack!');
     this.health -= damage * 0.6;
 
-    // TODO: add 20% to random operator
     const lastDamage = (damage * 0.2) / this.operators.length;
     this.operators.forEach((item) => item.getAttacked(lastDamage));
     this.operators[random(0, this.operators.length - 1)].getAttacked(

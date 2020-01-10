@@ -13,33 +13,11 @@ const App: FC = () => {
     counter++;
   };
 
-  // const s1 = new Squad();
-  //
-  // const handleAttack = () => {
-  //   s1.attack();
-  // };
-  //
-  // const handleGetAttacked = () => {
-  //   s1.getAttacked(10);
-  // };
-  // const handleLog = () => {
-  //   console.log(s1);
-  // };
-
   return (
     <div>
       <button type="button" onClick={handleClick}>
         create squad
       </button>
-      {/* <button type="button" onClick={handleAttack}>
-        attack
-      </button>
-      <button type="button" onClick={handleGetAttacked}>
-        get attacked
-      </button>
-      <button type="button" onClick={handleLog}>
-        log
-      </button> */}
       <SquadList />
     </div>
   );

@@ -43,6 +43,7 @@ module.exports = {
     'no-plusplus': 'off',
     'prefer-destructuring': 'off',
     'react/prop-types': 'off',
+    'no-underscore-dangle': 'off',
     "import/extensions": [
       "error",
       "ignorePackages",

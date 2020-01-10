@@ -7,33 +7,42 @@ export default class Squad {
 
   public membersCount: number = random(5, 10);
 
-  public members: (Soldier | Vehicle)[];
+  public members: (Soldier | Vehicle)[] = [];
 
-  constructor(name) {
+  constructor(name: string) {
     this.name = name;
-    const result: (Soldier | Vehicle)[] = [];
     for (let i = 0; i < this.membersCount; i++) {
-      result.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());
+      this.members.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());
     }
-    this.members = result;
   }
 
   public get attackSuccess(): number {
-    return geometricAverage(this.members.map((item) => item.attackSuccess));
+    return +geometricAverage(
+      this.members.map((item) => item.attackSuccess),
+    ).toFixed(2);
+  }
+
+  public get minAttackSuccess(): number {
+    return +geometricAverage(
+      this.members.map((item) => item.minAttackSuccess),
+    ).toFixed(2);
+  }
+
+  public get maxAttackSuccess(): number {
+    return +geometricAverage(
+      this.members.map((item) => item.maxAttackSuccess),
+    ).toFixed(2);
   }
 
   public get damage(): number {
-    return sum(this.members.map((item) => item.damage));
+    return +sum(this.members.map((item) => item.damage)).toFixed(2);
   }
 
   attack: () => void = () => {
-    console.log('total attack success:', this.attackSuccess);
-    console.log('total damage:', this.damage);
     this.members.forEach((item) => item.attack());
   };
 
   getAttacked: (totalDamage: number) => void = (totalDamage) => {
-    console.log('we are under attack!');
     const damage = totalDamage / this.membersCount;
     this.members.forEach((item) => item.getAttacked(damage));
   };

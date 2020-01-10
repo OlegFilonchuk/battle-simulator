@@ -7,20 +7,31 @@ export default class Soldier extends Unit {
   public get attackSuccess(): number {
     const { health, experience } = this;
 
-    return (0.5 * (1 + health / 100) * random(50 + experience, 100)) / 100;
+    return +(
+      (0.5 * (1 + health / 100) * random(50 + experience, 100)) /
+      100
+    ).toFixed(2);
+  }
+
+  public get minAttackSuccess(): number {
+    const { health, experience } = this;
+
+    return +((0.5 * (1 + health / 100) * (50 + experience)) / 100).toFixed(2);
+  }
+
+  public get maxAttackSuccess(): number {
+    return +((0.5 * (1 + this.health / 100) * 100) / 100).toFixed(2);
   }
 
   public get damage(): number {
-    return 0.05 + this.experience / 100;
+    return +(0.05 + this.experience / 100).toFixed(2);
   }
 
   attack: () => void = () => {
-    console.log('soldier attacks!');
     this.experience++;
   };
 
   getAttacked: (damage: number) => void = (damage) => {
     this.health -= damage;
-    console.log(`soldier has ${this.health} hp now`);
   };
 }
