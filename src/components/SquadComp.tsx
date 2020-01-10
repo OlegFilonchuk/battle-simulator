@@ -1,8 +1,8 @@
-import React, { ChangeEvent, EventHandler, FC, MouseEvent } from 'react';
+import React, { ChangeEvent, EventHandler, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import Squad from '../classes/Squad';
-import { changeTargetAction, updateSquadAction } from '../state/AC';
+import { changeTargetAction } from '../state/AC';
 import Soldier from '../classes/Soldier';
 import SoldierComp from './SoldierComp';
 import VehicleComp from './VehicleComp';
@@ -12,24 +12,10 @@ type Props = {
 };
 
 const SquadComp: FC<Props> = ({
-  squad: {
-    name,
-    membersCount,
-    members,
-    damage,
-    attack,
-    isActive,
-    target,
-  },
+  squad: { name, membersCount, members, damage, isActive },
 }) => {
   const dispatch: Dispatch = useDispatch();
   const targets = useSelector((state) => Object.values(state.squads));
-
-  const handleAttack: EventHandler<MouseEvent> = () => {
-    if (!target) return;
-    attack();
-    dispatch(updateSquadAction());
-  };
 
   const handleSetTarget: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
@@ -57,10 +43,6 @@ const SquadComp: FC<Props> = ({
           ))}
         </select>
       </label>
-
-      <button type="button" onClick={handleAttack}>
-        attack
-      </button>
 
       <ul>
         members:

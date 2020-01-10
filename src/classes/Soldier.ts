@@ -2,7 +2,15 @@ import Unit from './Unit';
 import { random } from '../utils/helpers';
 
 export default class Soldier extends Unit {
-  public experience = 0;
+  private _experience = 0;
+
+  public get experience(): number {
+    return this._experience;
+  }
+
+  public set experience(value) {
+    this._experience = value >= 50 ? 50 : value;
+  }
 
   public get isActive(): boolean {
     return this.health > 0;
@@ -22,7 +30,8 @@ export default class Soldier extends Unit {
   }
 
   attack: () => void = () => {
-    if (this.isActive) this.experience++;
+    if (!this.isActive) return;
+    this.experience++;
   };
 
   getAttacked: (damage: number) => void = (damage) => {

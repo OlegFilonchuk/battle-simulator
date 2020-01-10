@@ -11,7 +11,7 @@ const App: FC = () => {
 
   const squads: SquadState = useSelector((state) => state.squads);
 
-  const isWinner: () => boolean = () =>
+  const hasWinner: () => boolean = () =>
     Object.values(squads).filter((item) => item.isActive).length === 1;
 
   const handleCreateSquad: EventHandler<MouseEvent> = () => {
@@ -25,7 +25,7 @@ const App: FC = () => {
       return;
     }
 
-    while (!isWinner()) {
+    while (!hasWinner()) {
       Object.values(squads).forEach((item) => item.attack());
       dispatch(updateSquadAction());
     }
@@ -40,7 +40,7 @@ const App: FC = () => {
       <button type="button" onClick={handleStartFight}>
         FIGHT!
       </button>
-      <div>{isWinner() && 'WINNER'}</div>
+      <div>{hasWinner() && 'WINNER'}</div>
 
       <SquadList />
     </div>
