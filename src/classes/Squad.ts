@@ -3,11 +3,14 @@ import Soldier from './Soldier';
 import Vehicle from './Vehicle';
 
 export default class Squad {
+  public name: string;
+
   public membersCount: number = random(5, 10);
 
   public members: (Soldier | Vehicle)[];
 
-  constructor() {
+  constructor(name) {
+    this.name = name;
     const result: (Soldier | Vehicle)[] = [];
     for (let i = 0; i < this.membersCount; i++) {
       result.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());

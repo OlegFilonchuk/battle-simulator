@@ -1,19 +1,21 @@
 import { Reducer } from 'redux';
-import { CREATE_SQUAD } from './AC';
+import { CREATE_SQUAD, UPDATE_SQUAD } from './AC';
+import { SquadState } from '../utils/types';
 
-const initialState = {
-  squads: [],
-};
+const initialState: SquadState = {};
 
-const reducer: Reducer = (state = initialState, action) => {
+const reducer: Reducer = (state: SquadState = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case CREATE_SQUAD:
       return {
         ...state,
-        squads: [...state.squads, payload.squad],
+        [payload.squad.name]: payload.squad,
       };
+
+    case UPDATE_SQUAD:
+      return state;
 
     default:
       return state;

@@ -42,6 +42,7 @@ module.exports = {
     'react/prefer-stateless-function': 'off',
     'no-plusplus': 'off',
     'prefer-destructuring': 'off',
+    'react/prop-types': 'off',
     "import/extensions": [
       "error",
       "ignorePackages",
