@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import Squad from '../classes/Squad';
 import { updateSquadAction } from '../state/AC';
+import Soldier from '../classes/Soldier';
+import SoldierComp from './SoldierComp';
+import VehicleComp from './VehicleComp';
 
 type Props = {
   squad: Squad;
@@ -32,11 +35,11 @@ const SquadComp: FC<Props> = ({
   };
 
   return (
-    <div>
+    <div style={{ background: 'skyblue', padding: '1em', margin: '1em' }}>
       <h2>{name}</h2>
-      <p>{`Members count: ${membersCount}`}</p>
-      <p>{`attackSuccess: ${attackSuccess}`}</p>
-      <p>{`damage: ${damage}`}</p>
+      <div>{`Members count: ${membersCount}`}</div>
+      <div>{`attackSuccess: ${attackSuccess}`}</div>
+      <div>{`damage: ${damage}`}</div>
 
       <button type="button" onClick={handleAttack}>
         attack
@@ -45,7 +48,19 @@ const SquadComp: FC<Props> = ({
       <button type="button" onClick={handleGetAttacked}>
         get attacked
       </button>
-      <pre>{JSON.stringify(members, null, 2)}</pre>
+      <ul>
+        members:
+        {members.map((item, i) => {
+          const comp =
+            item instanceof Soldier ? (
+              <SoldierComp soldier={item} />
+            ) : (
+              <VehicleComp vehicle={item} />
+            );
+          // eslint-disable-next-line react/no-array-index-key
+          return <li key={i}>{comp}</li>;
+        })}
+      </ul>
     </div>
   );
 };
