@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, EventHandler, FC, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import Squad from '../classes/Squad';
@@ -20,34 +20,34 @@ const SquadComp: FC<Props> = ({
     maxAttackSuccess,
     damage,
     attack,
-    getAttacked,
-    isActive
+    isActive,
+    target,
   },
 }) => {
   const dispatch: Dispatch = useDispatch();
   const targets = useSelector((state) => Object.values(state.squads));
 
-  const handleAttack = () => {
+  const handleAttack: EventHandler<MouseEvent> = () => {
+    if (!target) return;
     attack();
     dispatch(updateSquadAction());
   };
 
-  const handleGetAttacked = () => {
-    getAttacked(10);
-    dispatch(updateSquadAction());
-  };
-
-  const handleSetTarget = (ev) => {
+  const handleSetTarget: EventHandler<ChangeEvent<HTMLSelectElement>> = (
+    ev,
+  ) => {
     dispatch(changeTargetAction(name, ev.target.value));
   };
 
   return (
-    <div style={{ background: 'skyblue', padding: '1em', margin: '1em' }}>
+    <div style={{ background: '#ddd', padding: '1em', margin: '1em' }}>
       <h2>{name}</h2>
       <div>{`Members count: ${membersCount}`}</div>
       <div>{`attackSuccess: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
       <div>{`damage: ${damage}`}</div>
-      <div>{isActive ? 'active' : 'dead'}</div>
+      <div style={{ background: isActive ? 'green' : 'red' }}>
+        {isActive ? 'active' : 'dead'}
+      </div>
 
       <label htmlFor="target">
         Select a target
@@ -65,9 +65,6 @@ const SquadComp: FC<Props> = ({
         attack
       </button>
 
-      <button type="button" onClick={handleGetAttacked}>
-        get attacked
-      </button>
       <ul>
         members:
         {members.map((item, i) => {

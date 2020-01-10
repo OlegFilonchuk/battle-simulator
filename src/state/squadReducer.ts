@@ -10,7 +10,6 @@ const squadReducer: Reducer = (state: SquadState = initialState, action) => {
 
   switch (type) {
     case CREATE_SQUAD:
-      // eslint-disable-next-line no-param-reassign
       state[payload.name] = new Squad(payload.name);
       return { ...state };
 
@@ -18,9 +17,6 @@ const squadReducer: Reducer = (state: SquadState = initialState, action) => {
       return { ...state };
 
     case CHANGE_TARGET:
-      console.log('src: ', payload.srcName);
-      console.log('tg: ', payload.tgName);
-      // eslint-disable-next-line no-param-reassign
       state[payload.srcName].target = state[payload.tgName];
       return { ...state };
 

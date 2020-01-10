@@ -8,7 +8,7 @@ export default abstract class Unit {
   }
 
   public set health(value) {
-    this._health = value;
+    this._health = value > 0 ? value : 0;
   }
 
   public recharge: number = random(100, 2000);

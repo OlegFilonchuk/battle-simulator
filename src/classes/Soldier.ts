@@ -28,14 +28,14 @@ export default class Soldier extends Unit {
   }
 
   public get damage(): number {
-    return +(0.05 + this.experience / 100).toFixed(2);
+    return this.isActive ? +(0.05 + this.experience / 100).toFixed(2) : 0;
   }
 
   attack: () => void = () => {
-    this.experience++;
+    if (this.isActive) this.experience++;
   };
 
   getAttacked: (damage: number) => void = (damage) => {
-    this.health -= damage;
+    if (this.isActive) this.health -= damage;
   };
 }

@@ -23,35 +23,51 @@ export default class Squad {
   }
 
   public get attackSuccess(): number {
+    const membersAlive: (Soldier | Vehicle)[] = this.members.filter(
+      (item) => item.isActive,
+    );
     return +geometricAverage(
-      this.members.map((item) => item.attackSuccess),
+      membersAlive.map((item) => item.attackSuccess),
     ).toFixed(2);
   }
 
   public get minAttackSuccess(): number {
+    const membersAlive: (Soldier | Vehicle)[] = this.members.filter(
+      (item) => item.isActive,
+    );
     return +geometricAverage(
-      this.members.map((item) => item.minAttackSuccess),
+      membersAlive.map((item) => item.minAttackSuccess),
     ).toFixed(2);
   }
 
   public get maxAttackSuccess(): number {
+    const membersAlive: (Soldier | Vehicle)[] = this.members.filter(
+      (item) => item.isActive,
+    );
     return +geometricAverage(
-      this.members.map((item) => item.maxAttackSuccess),
+      membersAlive.map((item) => item.maxAttackSuccess),
     ).toFixed(2);
   }
 
   public get damage(): number {
-    return +sum(this.members.map((item) => item.damage)).toFixed(2);
+    return this.isActive
+      ? +sum(this.members.map((item) => item.damage)).toFixed(2)
+      : 0;
   }
 
   attack: () => void = () => {
-    if (!this.target) return;
+    if (!this.target?.isActive || !this.isActive) return;
     this.members.forEach((item) => item.attack());
-    this.target.getAttacked(1000);
+    this.target.getAttacked(/* this.damage */ 1000);
   };
 
-  getAttacked: (totalDamage: number) => void = (totalDamage) => {
+  getAttacked: (totalDamage: number) => void = async (totalDamage) => {
+    if (!this.isActive) return;
+
     const damage = totalDamage / this.membersCount;
-    this.members.forEach((item) => item.getAttacked(damage));
+    await this.members.forEach((item) => item.getAttacked(damage));
+    if (!this.isActive) {
+      const a = console.log('DEAD!');
+    }
   };
 }

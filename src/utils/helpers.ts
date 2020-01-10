@@ -1,4 +1,5 @@
 export const geometricAverage: (arg: number[]) => number = (arg) => {
+  if (!arg.length) return 0;
   const base = arg.reduce((acc, curr) => acc * curr);
   return base ** (1 / arg.length);
 };

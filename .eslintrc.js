@@ -44,6 +44,7 @@ module.exports = {
     'prefer-destructuring': 'off',
     'react/prop-types': 'off',
     'no-underscore-dangle': 'off',
+    'no-param-reassign': 'off',
     "import/extensions": [
       "error",
       "ignorePackages",

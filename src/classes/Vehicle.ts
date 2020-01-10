@@ -26,46 +26,60 @@ export default class Vehicle extends Unit {
 
   public get attackSuccess(): number {
     const { health, operators } = this;
+    const operatorsAlive: Soldier[] = operators.filter((item) => item.isActive);
 
     return +(
       0.5 *
       (1 + health / 100) *
-      geometricAverage(operators.map((item) => item.attackSuccess))
+      geometricAverage(operatorsAlive.map((item) => item.attackSuccess))
     ).toFixed(2);
   }
 
   public get minAttackSuccess(): number {
     const { health, operators } = this;
+    const operatorsAlive: Soldier[] = operators.filter((item) => item.isActive);
 
     return +(
       0.5 *
       (1 + health / 100) *
-      geometricAverage(operators.map((item) => item.minAttackSuccess))
+      geometricAverage(operatorsAlive.map((item) => item.minAttackSuccess))
     ).toFixed(2);
   }
 
   public get maxAttackSuccess(): number {
     const { health, operators } = this;
+    const operatorsAlive: Soldier[] = operators.filter((item) => item.isActive);
 
     return +(
       0.5 *
       (1 + health / 100) *
-      geometricAverage(operators.map((item) => item.maxAttackSuccess))
+      geometricAverage(operatorsAlive.map((item) => item.maxAttackSuccess))
     ).toFixed(2);
   }
 
   public get damage(): number {
-    return +(
-      0.1 + sum(this.operators.map((item) => item.experience / 100))
-    ).toFixed(2);
+    return this.isActive
+      ? +(
+          0.1 + sum(this.operators.map((item) => item.experience / 100))
+        ).toFixed(2)
+      : 0;
   }
 
   attack: () => void = () => {
-    this.operators.forEach((item) => item.attack());
+    if (this.isActive) this.operators.forEach((item) => item.attack());
   };
 
   getAttacked: (damage: number) => void = (damage) => {
+    if (!this.isActive) return;
+
     this.health -= damage * 0.6;
+
+    if (!this.isActive) {
+      this.operators.forEach((item) => {
+        item.health = 0;
+      });
+      return;
+    }
 
     const lastDamage = (damage * 0.2) / this.operators.length;
     this.operators.forEach((item) => item.getAttacked(lastDamage));
