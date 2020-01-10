@@ -16,8 +16,6 @@ const SquadComp: FC<Props> = ({
     name,
     membersCount,
     members,
-    minAttackSuccess,
-    maxAttackSuccess,
     damage,
     attack,
     isActive,
@@ -43,7 +41,6 @@ const SquadComp: FC<Props> = ({
     <div style={{ background: '#ddd', padding: '1em', margin: '1em' }}>
       <h2>{name}</h2>
       <div>{`Members count: ${membersCount}`}</div>
-      <div>{`attackSuccess: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
       <div>{`damage: ${damage}`}</div>
       <div style={{ background: isActive ? 'green' : 'red' }}>
         {isActive ? 'active' : 'dead'}

@@ -35,28 +35,6 @@ export default class Vehicle extends Unit {
     ).toFixed(2);
   }
 
-  public get minAttackSuccess(): number {
-    const { health, operators } = this;
-    const operatorsAlive: Soldier[] = operators.filter((item) => item.isActive);
-
-    return +(
-      0.5 *
-      (1 + health / 100) *
-      geometricAverage(operatorsAlive.map((item) => item.minAttackSuccess))
-    ).toFixed(2);
-  }
-
-  public get maxAttackSuccess(): number {
-    const { health, operators } = this;
-    const operatorsAlive: Soldier[] = operators.filter((item) => item.isActive);
-
-    return +(
-      0.5 *
-      (1 + health / 100) *
-      geometricAverage(operatorsAlive.map((item) => item.maxAttackSuccess))
-    ).toFixed(2);
-  }
-
   public get damage(): number {
     return this.isActive
       ? +(

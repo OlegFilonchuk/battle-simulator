@@ -31,24 +31,6 @@ export default class Squad {
     ).toFixed(2);
   }
 
-  public get minAttackSuccess(): number {
-    const membersAlive: (Soldier | Vehicle)[] = this.members.filter(
-      (item) => item.isActive,
-    );
-    return +geometricAverage(
-      membersAlive.map((item) => item.minAttackSuccess),
-    ).toFixed(2);
-  }
-
-  public get maxAttackSuccess(): number {
-    const membersAlive: (Soldier | Vehicle)[] = this.members.filter(
-      (item) => item.isActive,
-    );
-    return +geometricAverage(
-      membersAlive.map((item) => item.maxAttackSuccess),
-    ).toFixed(2);
-  }
-
   public get damage(): number {
     return this.isActive
       ? +sum(this.members.map((item) => item.damage)).toFixed(2)

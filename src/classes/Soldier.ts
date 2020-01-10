@@ -17,16 +17,6 @@ export default class Soldier extends Unit {
     ).toFixed(2);
   }
 
-  public get minAttackSuccess(): number {
-    const { health, experience } = this;
-
-    return +((0.5 * (1 + health / 100) * (50 + experience)) / 100).toFixed(2);
-  }
-
-  public get maxAttackSuccess(): number {
-    return +((0.5 * (1 + this.health / 100) * 100) / 100).toFixed(2);
-  }
-
   public get damage(): number {
     return this.isActive ? +(0.05 + this.experience / 100).toFixed(2) : 0;
   }

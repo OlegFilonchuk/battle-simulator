@@ -14,8 +14,6 @@ const VehicleComp: FC<Props> = ({
     recharge,
     totalHealth,
     damage,
-    minAttackSuccess,
-    maxAttackSuccess,
     isActive,
   },
 }) => (
@@ -26,7 +24,6 @@ const VehicleComp: FC<Props> = ({
     <div>{`damage: ${damage}`}</div>
     <div>{`recharge: ${recharge}ms`}</div>
     <div>{`operators count: ${operatorsCount}`}</div>
-    <div>{`attack success: ${minAttackSuccess} ... ${maxAttackSuccess}`}</div>
     <div style={{ background: isActive ? 'green' : 'red' }}>
       {isActive ? 'active' : 'dead'}
     </div>
