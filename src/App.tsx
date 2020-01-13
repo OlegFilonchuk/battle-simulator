@@ -22,20 +22,27 @@ const App: FC = () => {
     setName(ev.target.value);
   };
 
-  const attack = () => {
+  const attack: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
     armies.forEach((item) => item.attack());
     dispatch(updateArmyAction());
   };
 
-  // const hasWinner: () => boolean = () =>
-  //   Object.values(squads).filter((item) => item.isActive).length === 1;
-  //
-  // const handleStartFight: EventHandler<MouseEvent> = () => {
-  //   while (!hasWinner()) {
-  //     Object.values(squads).forEach((item) => item.attack());
-  //     dispatch(updateArmyAction());
-  //   }
-  // };
+  const hasWinner: () => boolean | Army = () =>
+    armies.filter((item) => item.isActive).length <= 1
+      ? armies.find((item) => item.isActive)
+      : false;
+
+  const handleFight: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
+    const checkTargets = armies.every((item) => !!item.target);
+    const checkTactics = armies.every((item) => !!item.tactics);
+
+    if (!checkTactics || !checkTargets) return;
+
+    while (!hasWinner()) {
+      armies.forEach((item) => item.attack());
+    }
+    dispatch(updateArmyAction());
+  };
 
   const handleCreateArmy: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
     dispatch(createArmyAction(name));
@@ -55,8 +62,14 @@ const App: FC = () => {
       </button>
 
       <button type="button" onClick={attack}>
-        attack!
+        single attack!
       </button>
+
+      <button type="button" onClick={handleFight}>
+        fight
+      </button>
+
+      {!!hasWinner() && <div>{`Winner: ${(hasWinner() as Army).name}`}</div>}
 
       <ArmyList armies={armies} />
     </div>

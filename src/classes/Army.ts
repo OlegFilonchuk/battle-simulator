@@ -8,7 +8,7 @@ export default class Army {
 
   public target: Army;
 
-  private _tactics: Tactics;
+  public tactics: Tactics;
 
   constructor(name: string, squadsCount: number) {
     this.name = name;
@@ -18,26 +18,26 @@ export default class Army {
     }
   }
 
-  public set tactics(tactics: Tactics) {
-    this._tactics = tactics;
-    this.squads.forEach((item) => {
-      item.target = this.target.defineTarget(this._tactics);
-    });
-  }
-
   public get isActive(): boolean {
     return this.squads.some((item) => item.isActive);
   }
 
   attack() {
-    if (!this._tactics || !this.target) return;
-    this.squads.forEach((item) => item.attack());
+    if (!this.tactics || !this.target) return;
+    this.squads.forEach((item) => {
+      item.target = this.target.defineTarget(this.tactics);
+      item.attack();
+    });
   }
 
   defineTarget(tactics) {
-    const strongest = this.squads.sort((a, b) => b.damage - a.damage)[0];
+    const strongest = this.squads
+      .filter((item) => item.isActive)
+      .sort((a, b) => b.damage - a.damage)[0];
 
-    const weakest = this.squads.sort((a, b) => a.damage - b.damage)[0];
+    const weakest = this.squads
+      .filter((item) => item.isActive)
+      .sort((a, b) => a.damage - b.damage)[0];
 
     return tactics === 'weakest'
       ? weakest
