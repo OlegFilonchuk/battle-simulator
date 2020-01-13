@@ -22,10 +22,11 @@ const App: FC = () => {
 
     if (!checkTactics || !checkTargets) return;
 
-    while (!hasWinner()) {
+    const int = setInterval(() => {
       armies.forEach((item) => item.attack());
-    }
-    dispatch(updateArmyAction());
+      dispatch(updateArmyAction());
+      if (hasWinner()) clearInterval(int);
+    }, 10);
   };
 
   return (
