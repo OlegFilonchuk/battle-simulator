@@ -22,7 +22,7 @@ export default class Army {
     return this.squads.some((item) => item.isActive);
   }
 
-  attack() {
+  attack(): void {
     if (!this.tactics || !this.target) return;
     this.squads.forEach((item) => {
       item.target = this.target.defineTarget(this.tactics);
@@ -30,7 +30,7 @@ export default class Army {
     });
   }
 
-  defineTarget(tactics) {
+  defineTarget(tactics: Tactics): Squad {
     const strongest = this.squads
       .filter((item) => item.isActive)
       .sort((a, b) => b.damage - a.damage)[0];

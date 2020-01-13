@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import SquadComp from './SquadComp';
-import Squad from '../classes/Squad';
+import Squad from '../../classes/Squad';
 
 type Props = {
   squads: Squad[];

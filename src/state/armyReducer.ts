@@ -1,5 +1,4 @@
 import { Reducer } from 'redux';
-import { random } from '../utils/helpers';
 import { CHANGE_TACTICS, CREATE_ARMY, SET_TARGET, UPDATE_ARMY } from './armyAC';
 import Army from '../classes/Army';
 
@@ -10,7 +9,7 @@ const squadReducer: Reducer = (state: Army[] = initialState, action) => {
 
   switch (type) {
     case CREATE_ARMY:
-      state.push(new Army(payload.name, random(2, 3)));
+      state.push(new Army(payload.name, payload.squadsCount));
       return [...state];
 
     case UPDATE_ARMY:

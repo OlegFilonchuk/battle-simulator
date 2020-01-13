@@ -38,19 +38,19 @@ export default class Squad {
       : 0;
   }
 
-  attack: () => void = () => {
+  attack(): void {
     if (!this.target?.isActive || !this.isActive) return;
 
     if (this.attackSuccess < this.target.attackSuccess) return;
 
     this.members.forEach((item) => item.attack());
     this.target.getAttacked(this.damage);
-  };
+  }
 
-  getAttacked: (totalDamage: number) => void = async (totalDamage) => {
+  getAttacked: (totalDamage: number) => void = (totalDamage) => {
     if (!this.isActive) return;
 
     const damage = totalDamage / this.membersCount;
-    await this.members.forEach((item) => item.getAttacked(damage));
+    this.members.forEach((item) => item.getAttacked(damage));
   };
 }

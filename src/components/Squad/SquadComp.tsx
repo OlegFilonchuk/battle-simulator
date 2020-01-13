@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import Squad from '../classes/Squad';
-import Soldier from '../classes/Soldier';
-import SoldierComp from './SoldierComp';
-import VehicleComp from './VehicleComp';
+import Squad from '../../classes/Squad';
+import Soldier from '../../classes/Soldier';
+import SoldierComp from '../SoldierComp';
+import VehicleComp from '../VehicleComp';
 
 type Props = {
   squad: Squad;

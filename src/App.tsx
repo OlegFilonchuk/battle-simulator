@@ -1,31 +1,15 @@
-import React, {
-  ChangeEvent,
-  EventHandler,
-  FC,
-  MouseEvent,
-  useState,
-} from 'react';
+import React, { EventHandler, FC, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import ArmyList from './components/ArmyList';
-import { createArmyAction, updateArmyAction } from './state/armyAC';
+import ArmyList from './components/Army/ArmyList';
+import { updateArmyAction } from './state/armyAC';
 import Army from './classes/Army';
+import ArmyForm from './components/Army/ArmyForm';
 
 const App: FC = () => {
   const armies: Army[] = useSelector((state) => state.armies);
 
   const dispatch: Dispatch = useDispatch();
-
-  const [name, setName] = useState('');
-
-  const changeName: EventHandler<ChangeEvent<HTMLInputElement>> = (ev) => {
-    setName(ev.target.value);
-  };
-
-  const attack: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
-    armies.forEach((item) => item.attack());
-    dispatch(updateArmyAction());
-  };
 
   const hasWinner: () => boolean | Army = () =>
     armies.filter((item) => item.isActive).length <= 1
@@ -33,8 +17,8 @@ const App: FC = () => {
       : false;
 
   const handleFight: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
-    const checkTargets = armies.every((item) => !!item.target);
-    const checkTactics = armies.every((item) => !!item.tactics);
+    const checkTargets: boolean = armies.every((item) => !!item.target);
+    const checkTactics: boolean = armies.every((item) => !!item.tactics);
 
     if (!checkTactics || !checkTargets) return;
 
@@ -44,26 +28,9 @@ const App: FC = () => {
     dispatch(updateArmyAction());
   };
 
-  const handleCreateArmy: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
-    dispatch(createArmyAction(name));
-    setName('');
-  };
   return (
     <div>
-      <input
-        type="text"
-        placeholder="insert army name"
-        value={name}
-        onChange={changeName}
-      />
-
-      <button type="button" onClick={handleCreateArmy}>
-        create army
-      </button>
-
-      <button type="button" onClick={attack}>
-        single attack!
-      </button>
+      <ArmyForm />
 
       <button type="button" onClick={handleFight}>
         fight

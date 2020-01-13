@@ -1,9 +1,9 @@
 import React, { ChangeEvent, EventHandler, FC } from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import SquadList from './SquadList';
-import Army from '../classes/Army';
-import { changeTacticsAction, setTargetAction } from '../state/armyAC';
+import SquadList from '../Squad/SquadList';
+import Army from '../../classes/Army';
+import { changeTacticsAction, setTargetAction } from '../../state/armyAC';
 
 type Props = {
   army: Army;

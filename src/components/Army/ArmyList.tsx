@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import ArmyComp from './ArmyComp';
-import Army from '../classes/Army';
+import Army from '../../classes/Army';
 
 type Props = {
   armies: Army[];
