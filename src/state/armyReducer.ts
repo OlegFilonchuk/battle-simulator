@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { ArmyState } from '../utils/types';
 import { random } from '../utils/helpers';
-import { CHANGE_TACTICS, CREATE_ARMY, UPDATE_ARMY } from './armyAC';
+import { CHANGE_TACTICS, CREATE_ARMY, SET_TARGET, UPDATE_ARMY } from './armyAC';
 import Army from '../classes/Army';
 
 const initialState: ArmyState = {};
@@ -18,7 +18,11 @@ const squadReducer: Reducer = (state: ArmyState = initialState, action) => {
       return { ...state };
 
     case CHANGE_TACTICS:
-      // state[payload.srcName].target = state[payload.tgName];
+      state[payload.name].tactics = payload.tactics;
+      return { ...state };
+
+    case SET_TARGET:
+      state[payload.srcName].target = state[payload.tgName];
       return { ...state };
 
     default:

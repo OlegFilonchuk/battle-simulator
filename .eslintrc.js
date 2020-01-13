@@ -45,6 +45,7 @@ module.exports = {
     'react/prop-types': 'off',
     'no-underscore-dangle': 'off',
     'no-param-reassign': 'off',
+    'no-nested-ternary': 'off',
     "import/extensions": [
       "error",
       "ignorePackages",

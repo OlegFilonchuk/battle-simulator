@@ -13,6 +13,8 @@ export type StoreState = {
   armies: ArmyState;
 };
 
+export type Tactices = 'weakest' | 'strongest' | 'random';
+
 // class Singleton {
 //   private static _instance: Singleton;
 //
