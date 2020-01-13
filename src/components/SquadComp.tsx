@@ -14,13 +14,10 @@ type Props = {
 const SquadComp: FC<Props> = ({
   squad: { name, membersCount, members, damage, isActive },
 }) => {
-  const dispatch: Dispatch = useDispatch();
-  const targets = useSelector((state) => Object.values(state.squads));
-
   const handleSetTarget: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
   ) => {
-    dispatch(changeTargetAction(name, ev.target.value));
+    console.log(ev.target.value);
   };
 
   return (
@@ -36,11 +33,6 @@ const SquadComp: FC<Props> = ({
         Select a target
         <select name="target" onChange={handleSetTarget}>
           <option value="">None</option>
-          {targets.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
         </select>
       </label>
 

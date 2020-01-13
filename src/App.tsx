@@ -1,48 +1,20 @@
-import React, { EventHandler, FC, MouseEvent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
-import { createSquadAction, updateSquadAction } from './state/AC';
-import SquadList from './components/SquadList';
-import { SquadState } from './utils/types';
+import React, { EventHandler, FC, MouseEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import ArmyList from './components/ArmyList';
+import { createArmyAction } from './state/armyAC';
 
 const App: FC = () => {
-  const [counter, setCounter] = useState(0);
-  const dispatch: Dispatch = useDispatch();
-
-  const squads: SquadState = useSelector((state) => state.squads);
-
-  const hasWinner: () => boolean = () =>
-    Object.values(squads).filter((item) => item.isActive).length === 1;
-
-  const handleCreateSquad: EventHandler<MouseEvent> = () => {
-    dispatch(createSquadAction(`squad${counter}`));
-    setCounter(counter + 1);
+  const dispatch = useDispatch();
+  const handleCreateArmy: EventHandler<MouseEvent> = () => {
+    dispatch(createArmyAction('blah'));
   };
-
-  const handleStartFight: EventHandler<MouseEvent> = () => {
-    if (!Object.values(squads).every((item) => item.target)) {
-      console.log('set targets!');
-      return;
-    }
-
-    while (!hasWinner()) {
-      Object.values(squads).forEach((item) => item.attack());
-      dispatch(updateSquadAction());
-    }
-  };
-
   return (
     <div>
-      <button type="button" onClick={handleCreateSquad}>
-        create squad
+      <button type="button" onClick={handleCreateArmy}>
+        create army
       </button>
 
-      <button type="button" onClick={handleStartFight}>
-        FIGHT!
-      </button>
-      <div>{hasWinner() && 'WINNER'}</div>
-
-      <SquadList />
+      <ArmyList />
     </div>
   );
 };

@@ -1,14 +1,14 @@
 import { combineReducers, createStore, Reducer, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import squadReducer from './squadReducer';
+import armyReducer from './armyReducer';
 import { StoreState } from '../utils/types';
 
 const initialState: StoreState = {
-  squads: {},
+  armies: {},
 };
 
 const rootReducer: Reducer = combineReducers({
-  squads: squadReducer,
+  armies: armyReducer,
 });
 
 const store: Store = createStore(

@@ -1,19 +1,25 @@
 import Squad from '../classes/Squad';
+import Army from '../classes/Army';
 
 export type SquadState = {
   [name: string]: Squad;
 };
 
-export type StoreState = {
-  squads: SquadState;
+export type ArmyState = {
+  [name: string]: Army;
 };
-class Singleton {
-  private static _instance: Singleton;
 
-  constructor() {
-    if (Singleton._instance) {
-      return Singleton._instance;
-    }
-    Singleton._instance = this;
-  }
-}
+export type StoreState = {
+  armies: ArmyState;
+};
+
+// class Singleton {
+//   private static _instance: Singleton;
+//
+//   constructor() {
+//     if (Singleton._instance) {
+//       return Singleton._instance;
+//     }
+//     Singleton._instance = this;
+//   }
+// }
