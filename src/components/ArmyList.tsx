@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import Army from '../classes/Army';
 import ArmyComp from './ArmyComp';
+import { ArmyState } from '../utils/types';
 
-const ArmyList: FC = () => {
-  const armies: Army[] = useSelector((state) => state.armies);
+type Props = {
+  armies: ArmyState;
+};
+
+const ArmyList: FC<Props> = ({ armies }) => {
   return (
     <div>
       {Object.values(armies).map((item) => (

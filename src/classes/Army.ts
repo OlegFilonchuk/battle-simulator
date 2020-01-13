@@ -8,6 +8,8 @@ export default class Army {
 
   public target: Army;
 
+  private _tactics: Tactices;
+
   constructor(name: string, squadsCount: number) {
     this.name = name;
     for (let i = 0; i < squadsCount; i++) {
@@ -17,10 +19,19 @@ export default class Army {
   }
 
   public set tactics(tactics: Tactices) {
+    this._tactics = tactics;
     Object.values(this.squads).forEach((item) => {
-      item.target = this.target.defineTarget(this.tactics);
-      console.log(item.name, item.target);
+      item.target = this.target.defineTarget(this._tactics);
     });
+  }
+
+  public get isActive(): boolean {
+    return Object.values(this.squads).some((item) => item.isActive);
+  }
+
+  attack() {
+    if (!this._tactics || !this.target) return;
+    Object.values(this.squads).forEach((item) => item.attack());
   }
 
   defineTarget(tactics) {
@@ -40,6 +51,4 @@ export default class Army {
       ? weakest
       : strongest;
   }
-
-  // public tactics = 'weakest';
 }

@@ -9,7 +9,7 @@ type Props = {
   army: Army;
 };
 
-const ArmyComp: FC<Props> = ({ army: { squads, name, target }, army }) => {
+const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
   const dispatch: Dispatch = useDispatch();
 
   const armies: Army[] = Object.values(useSelector((state) => state.armies));
@@ -26,26 +26,24 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, target }, army }) => {
     dispatch(changeTacticsAction(name, ev.target.value));
   };
 
-  console.log(army);
   return (
     <div style={{ background: 'lightpink', margin: '2em' }}>
       <h2>{name}</h2>
 
-      <div>
-        target:
-        {target?.name}
-      </div>
+      <div>{isActive ? 'active' : 'dead'}</div>
 
       <label htmlFor="target">
         Select target
         <select name="target" onChange={handleTargetChange}>
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <option value="" />
-          {armies.map((item) => (
-            <option key={item.name} value={item.name}>
-              {item.name}
-            </option>
-          ))}
+          {armies
+            .filter((item) => item.name !== name)
+            .map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
         </select>
       </label>
 

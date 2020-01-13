@@ -5,17 +5,26 @@ import React, {
   MouseEvent,
   useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import ArmyList from './components/ArmyList';
 import { createArmyAction, updateArmyAction } from './state/armyAC';
+import { ArmyState } from './utils/types';
 
 const App: FC = () => {
-  const dispatch = useDispatch();
+  const armies: ArmyState = useSelector((state) => state.armies);
+
+  const dispatch: Dispatch = useDispatch();
 
   const [name, setName] = useState('');
 
   const changeName: EventHandler<ChangeEvent<HTMLInputElement>> = (ev) => {
     setName(ev.target.value);
+  };
+
+  const attack = () => {
+    Object.values(armies).forEach((item) => item.attack());
+    dispatch(updateArmyAction());
   };
 
   // const hasWinner: () => boolean = () =>
@@ -45,9 +54,11 @@ const App: FC = () => {
         create army
       </button>
 
-      <button type="button">Fight!</button>
+      <button type="button" onClick={attack}>
+        attack!
+      </button>
 
-      <ArmyList />
+      <ArmyList armies={armies} />
     </div>
   );
 };
