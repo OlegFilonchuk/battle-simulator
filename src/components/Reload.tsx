@@ -9,7 +9,7 @@ const Reload: FC<Props> = ({ reload }) => {
   return (
     <div>
       <img src={logo} alt="reload" height={15} width={15} />
-      {`${reload}s`}
+      {`${reload}`}
     </div>
   );
 };

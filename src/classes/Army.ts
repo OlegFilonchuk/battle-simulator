@@ -13,8 +13,7 @@ export default class Army {
   constructor(name: string, squadsCount: number) {
     this.name = name;
     for (let i = 0; i < squadsCount; i++) {
-      const squadName = `squad${i}`;
-      this.squads.push(new Squad(squadName, 5));
+      this.squads.push(new Squad(5));
     }
   }
 

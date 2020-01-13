@@ -3,24 +3,24 @@ import Squad from '../../classes/Squad';
 import Soldier from '../../classes/Soldier';
 import SoldierComp from '../SoldierComp';
 import VehicleComp from '../VehicleComp';
+import Damage from '../Damage';
 
 type Props = {
   squad: Squad;
 };
 
-const SquadComp: FC<Props> = ({
-  squad: { name, membersCount, members, damage, isActive },
-}) => (
-  <div style={{ background: '#ddd', padding: '1em', margin: '1em' }}>
-    <h2>{name}</h2>
+const SquadComp: FC<Props> = ({ squad: { membersCount, members, damage } }) => (
+  <div style={{ background: '#bbb', padding: '0.5em', margin: '0.5em' }}>
     <div>{`Members count: ${membersCount}`}</div>
-    <div>{`damage: ${damage}`}</div>
-    <div style={{ background: isActive ? 'green' : 'red' }}>
-      {isActive ? 'active' : 'dead'}
-    </div>
 
-    <ul>
-      members:
+    <Damage damage={damage} />
+
+    <ul
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       {members.map((item, i) => {
         const comp =
           item instanceof Soldier ? (
@@ -28,7 +28,6 @@ const SquadComp: FC<Props> = ({
           ) : (
             <VehicleComp vehicle={item} />
           );
-        // eslint-disable-next-line react/no-array-index-key
         return <li key={i}>{comp}</li>;
       })}
     </ul>

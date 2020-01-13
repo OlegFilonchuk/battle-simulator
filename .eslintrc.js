@@ -46,6 +46,7 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-param-reassign': 'off',
     'no-nested-ternary': 'off',
+    'react/no-array-index-key': 'off',
     "import/extensions": [
       "error",
       "ignorePackages",

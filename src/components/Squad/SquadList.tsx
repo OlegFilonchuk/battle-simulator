@@ -9,8 +9,8 @@ type Props = {
 const SquadList: FC<Props> = ({ squads }) => {
   return (
     <ul style={{ display: 'flex' }}>
-      {squads.map((item) => (
-        <li key={item.name}>
+      {squads.map((item, i) => (
+        <li key={i}>
           <SquadComp squad={item} />
         </li>
       ))}

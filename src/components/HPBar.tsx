@@ -6,9 +6,19 @@ type Props = {
 
 const HpBar: FC<Props> = ({ health }) => {
   return (
-    <div style={{ background: 'darkred', height: 10 }}>
+    <div
+      style={{
+        background: 'darkred',
+        height: 12,
+        width: '100%',
+      }}
+    >
       <div
-        style={{ background: 'green', height: '100%', width: `${health}%` }}
+        style={{
+          background: 'green',
+          height: '100%',
+          width: `${health}%`,
+        }}
       />
     </div>
   );

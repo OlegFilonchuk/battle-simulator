@@ -3,16 +3,13 @@ import Soldier from './Soldier';
 import Vehicle from './Vehicle';
 
 export default class Squad {
-  public name: string;
-
   public membersCount: number;
 
   public members: (Soldier | Vehicle)[] = [];
 
   public target: Squad;
 
-  constructor(name: string, membersCount) {
-    this.name = name;
+  constructor(membersCount) {
     this.membersCount = membersCount;
     for (let i = 0; i < this.membersCount; i++) {
       this.members.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());
