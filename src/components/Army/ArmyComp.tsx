@@ -27,7 +27,14 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
   };
 
   return (
-    <div style={{ background: 'lightpink', padding: '.5em', margin: '0.5em' }}>
+    <div
+      style={{
+        background: 'lightpink',
+        padding: '.5em',
+        margin: '0.5em',
+        opacity: isActive ? 1 : 0.7,
+      }}
+    >
       <h2>{name}</h2>
 
       <div>{isActive ? 'active' : 'dead'}</div>

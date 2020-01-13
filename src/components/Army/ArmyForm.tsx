@@ -1,8 +1,15 @@
-import React, { ChangeEvent, EventHandler, MouseEvent, useState } from 'react';
+import React, {
+  ChangeEvent,
+  EventHandler,
+  FC,
+  MouseEvent,
+  ReactElement,
+  useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { createArmyAction } from '../../state/armyAC';
 
-const ArmyForm = () => {
+const ArmyForm: FC = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [squadsCount, setSquadsCount] = useState(2);
@@ -25,13 +32,28 @@ const ArmyForm = () => {
     setName('');
   };
 
+  const renderSquadFields = () => {
+    const result: ReactElement[] = [];
+    for (let i = 1; i <= squadsCount; i++) {
+      result.push(
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
+        <label key={i}>
+          {`enter number of members for ${i} squad`}
+          <input type="number" />
+        </label>,
+      );
+    }
+    return result;
+  };
+
   return (
     <form
+      autoComplete="off"
       style={{
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        padding: '1em',
+        padding: '0.5em',
       }}
     >
       <input
@@ -51,6 +73,8 @@ const ArmyForm = () => {
           <option value={5}>5</option>
         </select>
       </label>
+
+      {renderSquadFields()}
 
       <button type="submit" onClick={handleCreateArmy}>
         create army

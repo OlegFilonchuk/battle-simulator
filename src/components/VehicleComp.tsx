@@ -11,7 +11,7 @@ type Props = {
 };
 
 const VehicleComp: FC<Props> = ({
-  vehicle: { operators, health, recharge, damage },
+  vehicle: { operators, health, recharge, damage, isActive },
 }) => (
   <div
     style={{
@@ -19,6 +19,7 @@ const VehicleComp: FC<Props> = ({
       padding: '0.5em',
       margin: '0.5em',
       alignSelf: 'stretch',
+      opacity: isActive ? 1 : 0.3,
     }}
   >
     <HpBar health={health} />

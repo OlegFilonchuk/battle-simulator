@@ -9,8 +9,17 @@ type Props = {
   squad: Squad;
 };
 
-const SquadComp: FC<Props> = ({ squad: { membersCount, members, damage } }) => (
-  <div style={{ background: '#bbb', padding: '0.5em', margin: '0.5em' }}>
+const SquadComp: FC<Props> = ({
+  squad: { membersCount, members, damage, isActive },
+}) => (
+  <div
+    style={{
+      background: '#bbb',
+      padding: '0.5em',
+      margin: '0.5em',
+      opacity: isActive ? 1 : 0.5,
+    }}
+  >
     <div>{`Members count: ${membersCount}`}</div>
 
     <Damage damage={damage} />

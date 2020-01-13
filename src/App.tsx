@@ -26,7 +26,7 @@ const App: FC = () => {
       armies.forEach((item) => item.attack());
       dispatch(updateArmyAction());
       if (hasWinner()) clearInterval(int);
-    }, 10);
+    }, 50);
   };
 
   return (

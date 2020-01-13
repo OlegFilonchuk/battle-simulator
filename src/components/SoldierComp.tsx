@@ -10,7 +10,7 @@ type Props = {
 };
 
 const SoldierComp: FC<Props> = ({
-  soldier: { health, experience, recharge, damage },
+  soldier: { health, experience, recharge, damage, isActive },
 }) => (
   <div
     style={{
@@ -20,6 +20,7 @@ const SoldierComp: FC<Props> = ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      opacity: isActive ? 1 : 0.1,
     }}
   >
     <HpBar health={health} />
