@@ -12,7 +12,7 @@ type Props = {
 const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
   const dispatch: Dispatch = useDispatch();
 
-  const armies: Army[] = Object.values(useSelector((state) => state.armies));
+  const armies: Army[] = useSelector((state) => state.armies);
 
   const handleTargetChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
@@ -27,7 +27,7 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
   };
 
   return (
-    <div style={{ background: 'lightpink', margin: '2em' }}>
+    <div style={{ background: 'lightpink', margin: '1em' }}>
       <h2>{name}</h2>
 
       <div>{isActive ? 'active' : 'dead'}</div>

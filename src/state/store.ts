@@ -5,10 +5,7 @@ import { StoreState } from '../utils/types';
 import Army from '../classes/Army';
 
 const initialState: StoreState = {
-  armies: {
-    Radiant: new Army('Radiant', 2),
-    Dire: new Army('Dire', 2),
-  },
+  armies: [new Army('Radiant', 2), new Army('Dire', 2)],
 };
 
 const rootReducer: Reducer = combineReducers({

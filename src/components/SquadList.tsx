@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import SquadComp from './SquadComp';
-import { SquadState } from '../utils/types';
+import Squad from '../classes/Squad';
 
 type Props = {
-  squads: SquadState;
+  squads: Squad[];
 };
 
 const SquadList: FC<Props> = ({ squads }) => {
   return (
     <ul style={{ display: 'flex' }}>
-      {Object.values(squads).map((item) => (
+      {squads.map((item) => (
         <li key={item.name}>
           <SquadComp squad={item} />
         </li>

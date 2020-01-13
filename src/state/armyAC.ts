@@ -1,5 +1,5 @@
 import { Action, ActionCreator } from 'redux';
-import { Tactices } from '../utils/types';
+import { Tactics } from '../utils/types';
 
 export const CREATE_ARMY = 'CREATE_ARMY' as const;
 export const UPDATE_ARMY = 'UPDATE_ARMY' as const;
@@ -41,7 +41,7 @@ export const updateArmyAction: ActionCreator<UpdateArmyAction> = () => ({
 
 export const changeTacticsAction: ActionCreator<ChangeTacticsAction> = (
   name: string,
-  tactics: Tactices,
+  tactics: Tactics,
 ) => ({
   type: CHANGE_TACTICS,
   payload: {

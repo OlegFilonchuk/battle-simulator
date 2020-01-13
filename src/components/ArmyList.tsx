@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import ArmyComp from './ArmyComp';
-import { ArmyState } from '../utils/types';
+import Army from '../classes/Army';
 
 type Props = {
-  armies: ArmyState;
+  armies: Army[];
 };
 
 const ArmyList: FC<Props> = ({ armies }) => {
   return (
-    <div>
-      {Object.values(armies).map((item) => (
+    <div style={{ display: 'flex' }}>
+      {armies.map((item) => (
         <ArmyComp key={item.name} army={item} />
       ))}
     </div>

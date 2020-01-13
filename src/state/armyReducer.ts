@@ -1,29 +1,31 @@
 import { Reducer } from 'redux';
-import { ArmyState } from '../utils/types';
 import { random } from '../utils/helpers';
 import { CHANGE_TACTICS, CREATE_ARMY, SET_TARGET, UPDATE_ARMY } from './armyAC';
 import Army from '../classes/Army';
 
-const initialState: ArmyState = {};
+const initialState: Army[] = [];
 
-const squadReducer: Reducer = (state: ArmyState = initialState, action) => {
+const squadReducer: Reducer = (state: Army[] = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
     case CREATE_ARMY:
-      state[payload.name] = new Army(payload.name, random(2, 3));
-      return { ...state };
+      state.push(new Army(payload.name, random(2, 3)));
+      return [...state];
 
     case UPDATE_ARMY:
-      return { ...state };
+      return [...state];
 
     case CHANGE_TACTICS:
-      state[payload.name].tactics = payload.tactics;
-      return { ...state };
+      state.find((item) => item.name === payload.name).tactics =
+        payload.tactics;
+      return [...state];
 
     case SET_TARGET:
-      state[payload.srcName].target = state[payload.tgName];
-      return { ...state };
+      state.find((item) => item.name === payload.srcName).target = state.find(
+        (item) => item.name === payload.tgName,
+      );
+      return [...state];
 
     default:
       return state;

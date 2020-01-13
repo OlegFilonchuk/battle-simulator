@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import ArmyList from './components/ArmyList';
 import { createArmyAction, updateArmyAction } from './state/armyAC';
-import { ArmyState } from './utils/types';
+import Army from './classes/Army';
 
 const App: FC = () => {
-  const armies: ArmyState = useSelector((state) => state.armies);
+  const armies: Army[] = useSelector((state) => state.armies);
 
   const dispatch: Dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ const App: FC = () => {
   };
 
   const attack = () => {
-    Object.values(armies).forEach((item) => item.attack());
+    armies.forEach((item) => item.attack());
     dispatch(updateArmyAction());
   };
 
