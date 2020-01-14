@@ -10,10 +10,10 @@ const SquadForm: FC<Props> = ({ i, onChange }) => {
     <label htmlFor={`squad${i}`}>
       {`Squad ${i + 1}: `}
       <input
+        onChange={onChange}
         name={`squad${i}`}
         type="number"
-        placeholder="Number of members"
-        onChange={onChange}
+        placeholder="Members (5...10)"
       />
     </label>
   );
