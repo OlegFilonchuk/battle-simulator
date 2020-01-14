@@ -28,12 +28,12 @@ type SetTargetAction = Action & {
 
 export const createArmyAction: ActionCreator<CreateArmyAction> = (
   name: string,
-  squadsCount: number,
+  squadState: number,
 ) => ({
   type: CREATE_ARMY,
   payload: {
     name,
-    squadsCount,
+    squadState,
   },
 });
 

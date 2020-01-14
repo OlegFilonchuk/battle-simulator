@@ -5,7 +5,7 @@ import ArmyList from './components/Army/ArmyList';
 import { updateArmyAction } from './state/armyAC';
 import Army from './classes/Army';
 import ArmyForm from './components/Army/ArmyForm';
-import armiesSelector from './state/selectors';
+import { armiesSelector } from './state/selectors';
 
 const App: FC = () => {
   const armies: Army[] = useSelector(armiesSelector);

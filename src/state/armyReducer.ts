@@ -9,7 +9,7 @@ const squadReducer: Reducer = (state: Army[] = initialState, action) => {
 
   switch (type) {
     case CREATE_ARMY:
-      state.push(new Army(payload.name, payload.squadsCount));
+      state.push(new Army(payload.name, payload.squadState));
       return [...state];
 
     case UPDATE_ARMY:

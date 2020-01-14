@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SquadList from '../Squad/SquadList';
 import Army from '../../classes/Army';
 import { changeTacticsAction, setTargetAction } from '../../state/armyAC';
-import armiesSelector from '../../state/selectors';
+import { armiesSelector } from '../../state/selectors';
 
 type Props = {
   army: Army;

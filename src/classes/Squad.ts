@@ -1,4 +1,4 @@
-import { geometricAverage, sum } from '../utils/helpers';
+import { geometricAverage, random, sum } from '../utils/helpers';
 import Soldier from './Soldier';
 import Vehicle from './Vehicle';
 
@@ -9,7 +9,7 @@ export default class Squad {
 
   public target: Squad;
 
-  constructor(membersCount) {
+  constructor(membersCount: number = random(5, 10)) {
     this.membersCount = membersCount;
     for (let i = 0; i < this.membersCount; i++) {
       this.members.push(Math.random() >= 0.5 ? new Soldier() : new Vehicle());

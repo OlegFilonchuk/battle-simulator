@@ -10,11 +10,9 @@ export default class Army {
 
   public tactics: Tactics;
 
-  constructor(name: string, squadsCount: number) {
+  constructor(name: string, squadState: number[]) {
     this.name = name;
-    for (let i = 0; i < squadsCount; i++) {
-      this.squads.push(new Squad(5));
-    }
+    this.squads = squadState.map((item) => new Squad(item));
   }
 
   public get isActive(): boolean {

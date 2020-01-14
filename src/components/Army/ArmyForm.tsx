@@ -8,58 +8,96 @@ import React, {
 import { connect } from 'react-redux';
 import { ActionCreator } from 'redux';
 import { CreateArmyAction, createArmyAction } from '../../state/armyAC';
+import SquadForm from '../Squad/SquadForm';
+import { armiesCounterSelector } from '../../state/selectors';
 
 type Props = {
   createArmy: ActionCreator<CreateArmyAction>;
+  armiesCount: number;
 };
 
 type State = {
   armyName: string;
   squadsCount: number;
+  squadState: number[];
 };
 
 class ArmyForm extends Component<Props, State> {
   state: State = {
     armyName: '',
     squadsCount: 2,
+    squadState: [],
   };
+
+  componentDidMount(): void {
+    const { squadsCount } = this.state;
+    const squadState = new Array(squadsCount).fill(undefined);
+    this.setState({
+      squadState,
+    });
+  }
 
   setName: EventHandler<ChangeEvent<HTMLInputElement>> = (ev) =>
     this.setState({
       armyName: ev.target.value,
     });
 
-  setSquadCount: EventHandler<ChangeEvent<HTMLSelectElement>> = (ev) =>
+  setSquadCount: EventHandler<ChangeEvent<HTMLSelectElement>> = (ev) => {
+    const { squadState, squadsCount } = this.state;
+    const newSquadState = [...squadState];
+    newSquadState.length = +ev.target.value;
+    for (let i = squadsCount - 1; i < +ev.target.value; i++) {
+      newSquadState[i] = undefined;
+    }
+
     this.setState({
       squadsCount: +ev.target.value,
+      squadState: newSquadState,
     });
+  };
 
   handleCreateArmy: EventHandler<MouseEvent<HTMLButtonElement>> = (ev) => {
     ev.preventDefault();
     const { createArmy } = this.props;
-    const { armyName, squadsCount } = this.state;
+    const { armyName, squadState } = this.state;
 
     if (!armyName) return;
-    createArmy(armyName, squadsCount);
+    createArmy(armyName, squadState);
+
+    this.setState({
+      armyName: '',
+    });
   };
 
-  renderSquadFields = () => {
+  handleChangeSquad = (ev, i) => {
+    const { squadState } = this.state;
+    const newSquadState: number[] = [...squadState];
+
+    newSquadState[i] = +ev.target.value;
+
+    this.setState({
+      squadState: newSquadState,
+    });
+  };
+
+  renderSquadFields: () => ReactElement[] = () => {
     const { squadsCount } = this.state;
     const result: ReactElement[] = [];
-    for (let i = 1; i <= squadsCount; i++) {
+    for (let i = 0; i < squadsCount; i++) {
       result.push(
-        // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label key={i}>
-          {`enter number of members for ${i} squad`}
-          <input type="number" />
-        </label>,
+        <SquadForm
+          key={i}
+          i={i}
+          onChange={(ev) => this.handleChangeSquad(ev, i)}
+        />,
       );
     }
     return result;
   };
 
   render() {
-    const { armyName } = this.state;
+    const { armyName, squadsCount } = this.state;
+    const { armiesCount } = this.props;
     return (
       <form
         autoComplete="off"
@@ -70,6 +108,7 @@ class ArmyForm extends Component<Props, State> {
           padding: '0.5em',
         }}
       >
+        {`Create army ${armiesCount + 1}: `}
         <input
           type="text"
           name="name"
@@ -77,23 +116,21 @@ class ArmyForm extends Component<Props, State> {
           value={armyName}
           onChange={this.setName}
         />
-
         <label htmlFor="squadsCount">
           Select number of squads
           <select
             name="squadsCount"
             onChange={this.setSquadCount}
-            defaultValue={2}
+            defaultValue={squadsCount}
           >
+            <option value={1}>1</option>
             <option value={2}>2</option>
             <option value={3}>3</option>
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
         </label>
-
         {this.renderSquadFields()}
-
         <button type="submit" onClick={this.handleCreateArmy}>
           create army
         </button>
@@ -102,4 +139,6 @@ class ArmyForm extends Component<Props, State> {
   }
 }
 
-export default connect(null, { createArmy: createArmyAction })(ArmyForm);
+export default connect(armiesCounterSelector, { createArmy: createArmyAction })(
+  ArmyForm,
+);
