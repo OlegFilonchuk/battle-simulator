@@ -21,6 +21,7 @@ export default class Army {
 
   attack(): void {
     if (!this.tactics || !this.target) return;
+
     this.squads.forEach((item) => {
       item.target = this.target.defineTarget(this.tactics);
       item.attack();

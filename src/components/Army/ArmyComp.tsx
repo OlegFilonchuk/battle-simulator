@@ -30,7 +30,7 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
       setTargetName(target?.name);
       dispatch(targetChangeAction(name, target?.name));
     }
-  }, [armies.length]);
+  }, [armies.length, armies, dispatch, name, targetName]);
 
   const handleTargetChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
@@ -52,7 +52,7 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
         background: 'lightpink',
         padding: '.5em',
         margin: '0.5em',
-        opacity: isActive ? 1 : 0.7,
+        opacity: isActive ? 1 : 0.5,
       }}
     >
       <h2>{name}</h2>

@@ -6,13 +6,13 @@ export type StoreState = {
 
 export type Tactics = 'weakest' | 'strongest' | 'random';
 
-// class Singleton {
-//   private static _instance: Singleton;
-//
-//   constructor() {
-//     if (Singleton._instance) {
-//       return Singleton._instance;
-//     }
-//     Singleton._instance = this;
-//   }
-// }
+export class Singleton {
+  private static _instance: Singleton;
+
+  constructor() {
+    if (Singleton._instance) {
+      return Singleton._instance;
+    }
+    Singleton._instance = this;
+  }
+}

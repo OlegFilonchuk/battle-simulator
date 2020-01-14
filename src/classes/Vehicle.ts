@@ -20,7 +20,7 @@ export default class Vehicle extends Unit {
     return this.health > 0 && this.operators.some((item) => item.isActive);
   }
 
-  public get totalHealth(): number {
+  private get totalHealth(): number {
     return average(this.health, ...this.operators.map((item) => item.health));
   }
 
@@ -44,7 +44,8 @@ export default class Vehicle extends Unit {
   }
 
   attack(): void {
-    if (this.isActive) this.operators.forEach((item) => item.attack());
+    if (!this.isActive) return;
+    this.operators.forEach((item) => item.attack());
   }
 
   getAttacked(damage: number): void {

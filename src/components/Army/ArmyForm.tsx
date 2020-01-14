@@ -48,7 +48,7 @@ class ArmyForm extends Component<Props, State> {
     const { squadState, squadsCount } = this.state;
     const newSquadState = [...squadState];
     newSquadState.length = +ev.target.value;
-    for (let i = squadsCount - 1; i < +ev.target.value; i++) {
+    for (let i = squadsCount; i < +ev.target.value; i++) {
       newSquadState[i] = 5;
     }
 

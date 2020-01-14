@@ -20,7 +20,7 @@ const SoldierComp: FC<Props> = ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      opacity: isActive ? 1 : 0.1,
+      opacity: isActive ? 1 : 0.5,
     }}
   >
     <HpBar health={health} />

@@ -19,7 +19,7 @@ const VehicleComp: FC<Props> = ({
       padding: '0.5em',
       margin: '0.5em',
       alignSelf: 'stretch',
-      opacity: isActive ? 1 : 0.3,
+      opacity: isActive ? 1 : 0.5,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
