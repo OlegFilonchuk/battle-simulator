@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SquadList from '../Squad/SquadList';
 import Army from '../../classes/Army';
 import { changeTacticsAction, setTargetAction } from '../../state/armyAC';
+import armiesSelector from '../../state/selectors';
 
 type Props = {
   army: Army;
@@ -12,7 +13,7 @@ type Props = {
 const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
   const dispatch: Dispatch = useDispatch();
 
-  const armies: Army[] = useSelector((state) => state.armies);
+  const armies: Army[] = useSelector(armiesSelector);
 
   const handleTargetChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
