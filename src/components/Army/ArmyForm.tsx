@@ -9,11 +9,11 @@ import { connect } from 'react-redux';
 import { ActionCreator } from 'redux';
 import { ArmyCreateAction, armyCreateAction } from '../../state/armyAC';
 import SquadForm from '../Squad/SquadForm';
-import { armiesCounterSelector } from '../../state/selectors';
+import Army from '../../classes/Army';
 
 type Props = {
   createArmy: ActionCreator<ArmyCreateAction>;
-  armiesCount: number;
+  armies: Army[];
 };
 
 type State = {
@@ -42,7 +42,9 @@ class ArmyForm extends Component<Props, State> {
       armyName: ev.target.value,
     });
 
-  handleSquadCountChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (ev) => {
+  handleSquadCountChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
+    ev,
+  ) => {
     const { squadState, squadsCount } = this.state;
     const newSquadState = [...squadState];
     newSquadState.length = +ev.target.value;
@@ -83,12 +85,18 @@ class ArmyForm extends Component<Props, State> {
     return result;
   };
 
+  checkName: () => boolean = () => {
+    const { armyName } = this.state;
+    const { armies } = this.props;
+    return armyName && !armies.map((item) => item.name).includes(armyName);
+  };
+
   handleArmyCreate: EventHandler<MouseEvent<HTMLButtonElement>> = (ev) => {
     ev.preventDefault();
-    const { createArmy } = this.props;
+    const { createArmy, armies } = this.props;
     const { armyName, squadState } = this.state;
 
-    if (!armyName) return;
+    if (!armyName || armies.map((item) => item.name).includes(armyName)) return;
     createArmy(armyName, squadState);
 
     this.setState({
@@ -98,7 +106,7 @@ class ArmyForm extends Component<Props, State> {
 
   render() {
     const { armyName, squadsCount } = this.state;
-    const { armiesCount } = this.props;
+    const { armies } = this.props;
     return (
       <form
         autoComplete="off"
@@ -109,7 +117,7 @@ class ArmyForm extends Component<Props, State> {
           padding: '0.5em',
         }}
       >
-        {`Create army ${armiesCount + 1}: `}
+        {`Create army ${armies.length + 1}: `}
         <input
           type="text"
           name="name"
@@ -131,7 +139,11 @@ class ArmyForm extends Component<Props, State> {
           </select>
         </label>
         {this.renderSquadFields()}
-        <button type="submit" onClick={this.handleArmyCreate}>
+        <button
+          type="submit"
+          onClick={this.handleArmyCreate}
+          disabled={!this.checkName()}
+        >
           create army
         </button>
       </form>
@@ -139,6 +151,9 @@ class ArmyForm extends Component<Props, State> {
   }
 }
 
-export default connect(armiesCounterSelector, { createArmy: armyCreateAction })(
-  ArmyForm,
-);
+export default connect(
+  ({ armies }) => ({
+    armies,
+  }),
+  { createArmy: armyCreateAction },
+)(ArmyForm);

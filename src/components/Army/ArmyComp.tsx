@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SquadList from '../Squad/SquadList';
 import Army from '../../classes/Army';
 import { tacticsChangeAction, targetChangeAction } from '../../state/armyAC';
-import { armiesSelector } from '../../state/selectors';
+import armiesSelector from '../../state/selectors';
 import { Tactics } from '../../utils/types';
 
 type Props = {

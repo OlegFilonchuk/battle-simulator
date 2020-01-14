@@ -5,7 +5,7 @@ import ArmyList from './components/Army/ArmyList';
 import { armyUpdateAction } from './state/armyAC';
 import Army from './classes/Army';
 import ArmyForm from './components/Army/ArmyForm';
-import { armiesSelector } from './state/selectors';
+import armiesSelector from './state/selectors';
 
 const App: FC = () => {
   const armies: Army[] = useSelector(armiesSelector);
@@ -17,12 +17,11 @@ const App: FC = () => {
       ? armies.find((item) => item.isActive)
       : false;
 
+  const checkPassed: () => boolean = () => {
+    return armies.length > 0 && armies.every((item) => !!item.target);
+  };
+
   const handleFight: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
-    const checkTargets: boolean = armies.every((item) => !!item.target);
-    const checkTactics: boolean = armies.every((item) => !!item.tactics);
-
-    if (!checkTactics || !checkTargets) return;
-
     const int = setInterval(() => {
       armies.forEach((item) => item.attack());
       dispatch(armyUpdateAction());
@@ -34,7 +33,7 @@ const App: FC = () => {
     <div>
       <ArmyForm />
 
-      <button type="button" onClick={handleFight}>
+      <button type="button" onClick={handleFight} disabled={!checkPassed()}>
         fight
       </button>
 
