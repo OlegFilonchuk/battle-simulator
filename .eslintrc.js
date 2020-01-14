@@ -48,6 +48,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'react/no-array-index-key': 'off',
     'spaced-comment': 'off',
+    'react/state-in-constructor': 'off',
     "import/extensions": [
       "error",
       "ignorePackages",

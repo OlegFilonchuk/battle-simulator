@@ -6,7 +6,7 @@ export const UPDATE_ARMY = 'UPDATE_ARMY' as const;
 export const CHANGE_TACTICS = 'CHANGE_TACTICS' as const;
 export const SET_TARGET = 'SET_TARGET' as const;
 
-type CreateArmyAction = Action & {
+export type CreateArmyAction = Action & {
   type: typeof CREATE_ARMY;
 };
 
