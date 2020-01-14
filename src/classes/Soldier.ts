@@ -29,12 +29,12 @@ export default class Soldier extends Unit {
     return this.isActive ? +(0.05 + this.experience / 100).toFixed(2) : 0;
   }
 
-  attack: () => void = () => {
+  attack(): void {
     if (!this.isActive) return;
     this.experience++;
-  };
+  }
 
-  getAttacked: (damage: number) => void = (damage) => {
+  getAttacked(damage: number): void {
     if (this.isActive) this.health -= damage;
-  };
+  }
 }

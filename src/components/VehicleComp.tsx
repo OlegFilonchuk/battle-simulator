@@ -20,6 +20,9 @@ const VehicleComp: FC<Props> = ({
       margin: '0.5em',
       alignSelf: 'stretch',
       opacity: isActive ? 1 : 0.3,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     }}
   >
     <HpBar health={health} />

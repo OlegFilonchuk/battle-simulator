@@ -7,7 +7,7 @@ const initialState: StoreState = {
   armies: [],
 };
 
-const rootReducer: Reducer = combineReducers({
+const rootReducer: Reducer<StoreState> = combineReducers({
   armies: armyReducer,
 });
 

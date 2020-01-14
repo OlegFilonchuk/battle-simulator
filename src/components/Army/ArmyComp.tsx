@@ -9,7 +9,7 @@ import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import SquadList from '../Squad/SquadList';
 import Army from '../../classes/Army';
-import { changeTacticsAction, setTargetAction } from '../../state/armyAC';
+import { tacticsChangeAction, targetChangeAction } from '../../state/armyAC';
 import { armiesSelector } from '../../state/selectors';
 import { Tactics } from '../../utils/types';
 
@@ -28,7 +28,7 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
     if (armies.length > 1 && !targetName) {
       const target = armies.find((item) => item.name !== name);
       setTargetName(target?.name);
-      dispatch(setTargetAction(name, target?.name));
+      dispatch(targetChangeAction(name, target?.name));
     }
   }, [armies.length]);
 
@@ -36,14 +36,14 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
     ev,
   ) => {
     setTargetName(ev.target.value);
-    dispatch(setTargetAction(name, ev.target.value));
+    dispatch(targetChangeAction(name, ev.target.value));
   };
 
   const handleTacticsChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
   ) => {
     setTacticsName(ev.target.value as Tactics);
-    dispatch(changeTacticsAction(name, ev.target.value));
+    dispatch(tacticsChangeAction(name, ev.target.value));
   };
 
   return (
@@ -62,8 +62,6 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
       <label htmlFor="target">
         Select target
         <select name="target" onChange={handleTargetChange} value={targetName}>
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <option value="" />
           {armies
             .filter((item) => item.name !== name)
             .map((item) => (
@@ -81,8 +79,6 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
           onChange={handleTacticsChange}
           value={tacticsName}
         >
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <option value="" />
           <option value="weakest">weakest</option>
           <option value="strongest">strongest</option>
           <option value="random">random</option>

@@ -7,12 +7,12 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreator } from 'redux';
-import { CreateArmyAction, createArmyAction } from '../../state/armyAC';
+import { ArmyCreateAction, armyCreateAction } from '../../state/armyAC';
 import SquadForm from '../Squad/SquadForm';
 import { armiesCounterSelector } from '../../state/selectors';
 
 type Props = {
-  createArmy: ActionCreator<CreateArmyAction>;
+  createArmy: ActionCreator<ArmyCreateAction>;
   armiesCount: number;
 };
 
@@ -31,23 +31,23 @@ class ArmyForm extends Component<Props, State> {
 
   componentDidMount(): void {
     const { squadsCount } = this.state;
-    const squadState = new Array(squadsCount).fill(undefined);
+    const squadState = new Array(squadsCount).fill(5);
     this.setState({
       squadState,
     });
   }
 
-  setName: EventHandler<ChangeEvent<HTMLInputElement>> = (ev) =>
+  handleNameChange: EventHandler<ChangeEvent<HTMLInputElement>> = (ev) =>
     this.setState({
       armyName: ev.target.value,
     });
 
-  setSquadCount: EventHandler<ChangeEvent<HTMLSelectElement>> = (ev) => {
+  handleSquadCountChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (ev) => {
     const { squadState, squadsCount } = this.state;
     const newSquadState = [...squadState];
     newSquadState.length = +ev.target.value;
     for (let i = squadsCount - 1; i < +ev.target.value; i++) {
-      newSquadState[i] = undefined;
+      newSquadState[i] = 5;
     }
 
     this.setState({
@@ -56,7 +56,34 @@ class ArmyForm extends Component<Props, State> {
     });
   };
 
-  handleCreateArmy: EventHandler<MouseEvent<HTMLButtonElement>> = (ev) => {
+  changeSquad: (i: number, value: number) => void = (i, value) => {
+    const { squadState } = this.state;
+    const newSquadState: number[] = [...squadState];
+
+    newSquadState[i] = value;
+
+    this.setState({
+      squadState: newSquadState,
+    });
+  };
+
+  renderSquadFields: () => ReactElement[] = () => {
+    const { squadState } = this.state;
+    const result: ReactElement[] = [];
+    for (let i = 0; i < squadState.length; i++) {
+      result.push(
+        <SquadForm
+          initialValue={squadState[i]}
+          key={i}
+          i={i}
+          onChange={this.changeSquad}
+        />,
+      );
+    }
+    return result;
+  };
+
+  handleArmyCreate: EventHandler<MouseEvent<HTMLButtonElement>> = (ev) => {
     ev.preventDefault();
     const { createArmy } = this.props;
     const { armyName, squadState } = this.state;
@@ -67,32 +94,6 @@ class ArmyForm extends Component<Props, State> {
     this.setState({
       armyName: '',
     });
-  };
-
-  handleChangeSquad = (ev, i) => {
-    const { squadState } = this.state;
-    const newSquadState: number[] = [...squadState];
-
-    newSquadState[i] = +ev.target.value;
-
-    this.setState({
-      squadState: newSquadState,
-    });
-  };
-
-  renderSquadFields: () => ReactElement[] = () => {
-    const { squadsCount } = this.state;
-    const result: ReactElement[] = [];
-    for (let i = 0; i < squadsCount; i++) {
-      result.push(
-        <SquadForm
-          key={i}
-          i={i}
-          onChange={(ev) => this.handleChangeSquad(ev, i)}
-        />,
-      );
-    }
-    return result;
   };
 
   render() {
@@ -114,13 +115,13 @@ class ArmyForm extends Component<Props, State> {
           name="name"
           placeholder="Insert army name"
           value={armyName}
-          onChange={this.setName}
+          onChange={this.handleNameChange}
         />
         <label htmlFor="squadsCount">
           Select number of squads
           <select
             name="squadsCount"
-            onChange={this.setSquadCount}
+            onChange={this.handleSquadCountChange}
             defaultValue={squadsCount}
           >
             <option value={2}>2</option>
@@ -130,7 +131,7 @@ class ArmyForm extends Component<Props, State> {
           </select>
         </label>
         {this.renderSquadFields()}
-        <button type="submit" onClick={this.handleCreateArmy}>
+        <button type="submit" onClick={this.handleArmyCreate}>
           create army
         </button>
       </form>
@@ -138,6 +139,6 @@ class ArmyForm extends Component<Props, State> {
   }
 }
 
-export default connect(armiesCounterSelector, { createArmy: createArmyAction })(
+export default connect(armiesCounterSelector, { createArmy: armyCreateAction })(
   ArmyForm,
 );

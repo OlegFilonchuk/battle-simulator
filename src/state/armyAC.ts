@@ -1,62 +1,62 @@
 import { Action, ActionCreator } from 'redux';
 import { Tactics } from '../utils/types';
 
-export const CREATE_ARMY = 'CREATE_ARMY' as const;
-export const UPDATE_ARMY = 'UPDATE_ARMY' as const;
-export const CHANGE_TACTICS = 'CHANGE_TACTICS' as const;
-export const SET_TARGET = 'SET_TARGET' as const;
+export const ARMY_CREATE = 'ARMY_CREATE' as const;
+export const ARMY_UPDATE = 'ARMY_UPDATE' as const;
+export const ARMY_TACTICS_CHANGE = 'ARMY_TACTICS_CHANGE' as const;
+export const ARMY_TARGET_CHANGE = 'ARMY_TARGET_CHANGE' as const;
 
-export type CreateArmyAction = Action & {
-  type: typeof CREATE_ARMY;
+export type ArmyCreateAction = Action & {
+  type: typeof ARMY_CREATE;
 };
 
-type UpdateArmyAction = Action & {
-  type: typeof UPDATE_ARMY;
+type ArmyUpdateAction = Action & {
+  type: typeof ARMY_UPDATE;
 };
 
-type ChangeTacticsAction = Action & {
-  type: typeof CHANGE_TACTICS;
+type TacticsChangeAction = Action & {
+  type: typeof ARMY_TACTICS_CHANGE;
 };
 
-type SetTargetAction = Action & {
-  type: typeof SET_TARGET;
+type TargetChangeAction = Action & {
+  type: typeof ARMY_TARGET_CHANGE;
   payload: {
     srcName: string;
     tgName: string;
   };
 };
 
-export const createArmyAction: ActionCreator<CreateArmyAction> = (
+export const armyCreateAction: ActionCreator<ArmyCreateAction> = (
   name: string,
   squadState: number,
 ) => ({
-  type: CREATE_ARMY,
+  type: ARMY_CREATE,
   payload: {
     name,
     squadState,
   },
 });
 
-export const updateArmyAction: ActionCreator<UpdateArmyAction> = () => ({
-  type: UPDATE_ARMY,
+export const armyUpdateAction: ActionCreator<ArmyUpdateAction> = () => ({
+  type: ARMY_UPDATE,
 });
 
-export const changeTacticsAction: ActionCreator<ChangeTacticsAction> = (
+export const tacticsChangeAction: ActionCreator<TacticsChangeAction> = (
   name: string,
   tactics: Tactics,
 ) => ({
-  type: CHANGE_TACTICS,
+  type: ARMY_TACTICS_CHANGE,
   payload: {
     name,
     tactics,
   },
 });
 
-export const setTargetAction: ActionCreator<SetTargetAction> = (
+export const targetChangeAction: ActionCreator<TargetChangeAction> = (
   srcName: string,
   tgName: string,
 ) => ({
-  type: SET_TARGET,
+  type: ARMY_TARGET_CHANGE,
   payload: {
     srcName,
     tgName,

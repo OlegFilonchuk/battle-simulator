@@ -43,11 +43,11 @@ export default class Vehicle extends Unit {
       : 0;
   }
 
-  attack: () => void = () => {
+  attack(): void {
     if (this.isActive) this.operators.forEach((item) => item.attack());
-  };
+  }
 
-  getAttacked: (damage: number) => void = (damage) => {
+  getAttacked(damage: number): void {
     if (!this.isActive) return;
 
     this.health -= damage * 0.6;
@@ -64,5 +64,5 @@ export default class Vehicle extends Unit {
     this.operators[random(0, this.operators.length - 1)].getAttacked(
       damage * 0.2,
     );
-  };
+  }
 }

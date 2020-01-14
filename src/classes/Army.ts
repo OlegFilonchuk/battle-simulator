@@ -28,11 +28,11 @@ export default class Army {
   }
 
   defineTarget(tactics: Tactics): Squad {
-    const strongest = this.squads
+    const strongest: Squad = this.squads
       .filter((item) => item.isActive)
       .sort((a, b) => b.damage - a.damage)[0];
 
-    const weakest = this.squads
+    const weakest: Squad = this.squads
       .filter((item) => item.isActive)
       .sort((a, b) => a.damage - b.damage)[0];
 

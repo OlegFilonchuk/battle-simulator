@@ -2,7 +2,7 @@ import React, { EventHandler, FC, MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import ArmyList from './components/Army/ArmyList';
-import { updateArmyAction } from './state/armyAC';
+import { armyUpdateAction } from './state/armyAC';
 import Army from './classes/Army';
 import ArmyForm from './components/Army/ArmyForm';
 import { armiesSelector } from './state/selectors';
@@ -25,7 +25,7 @@ const App: FC = () => {
 
     const int = setInterval(() => {
       armies.forEach((item) => item.attack());
-      dispatch(updateArmyAction());
+      dispatch(armyUpdateAction());
       if (hasWinner()) clearInterval(int);
     }, 50);
   };
