@@ -8,7 +8,7 @@ export default class Army {
 
   public target: Army;
 
-  public tactics: Tactics;
+  public tactics: Tactics = 'random';
 
   constructor(name: string, squadState: number[]) {
     this.name = name;

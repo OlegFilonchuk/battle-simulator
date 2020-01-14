@@ -1,29 +1,48 @@
-import React, { ChangeEvent, EventHandler, FC } from 'react';
+import React, {
+  ChangeEvent,
+  EventHandler,
+  FC,
+  useEffect,
+  useState,
+} from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import SquadList from '../Squad/SquadList';
 import Army from '../../classes/Army';
 import { changeTacticsAction, setTargetAction } from '../../state/armyAC';
 import { armiesSelector } from '../../state/selectors';
+import { Tactics } from '../../utils/types';
 
 type Props = {
   army: Army;
 };
 
-const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
+const ArmyComp: FC<Props> = ({ army: { squads, name, isActive, tactics } }) => {
   const dispatch: Dispatch = useDispatch();
-
   const armies: Army[] = useSelector(armiesSelector);
+
+  const [targetName, setTargetName] = useState('');
+  const [tacticsName, setTacticsName] = useState(tactics);
+
+  useEffect(() => {
+    if (armies.length > 1 && !targetName) {
+      const target = armies.find((item) => item.name !== name);
+      setTargetName(target?.name);
+      dispatch(setTargetAction(name, target?.name));
+    }
+  }, [armies.length]);
 
   const handleTargetChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
   ) => {
+    setTargetName(ev.target.value);
     dispatch(setTargetAction(name, ev.target.value));
   };
 
   const handleTacticsChange: EventHandler<ChangeEvent<HTMLSelectElement>> = (
     ev,
   ) => {
+    setTacticsName(ev.target.value as Tactics);
     dispatch(changeTacticsAction(name, ev.target.value));
   };
 
@@ -42,7 +61,7 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
 
       <label htmlFor="target">
         Select target
-        <select name="target" onChange={handleTargetChange}>
+        <select name="target" onChange={handleTargetChange} value={targetName}>
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <option value="" />
           {armies
@@ -57,7 +76,11 @@ const ArmyComp: FC<Props> = ({ army: { squads, name, isActive } }) => {
 
       <label htmlFor="tactics">
         Select tactics
-        <select name="tactics" onChange={handleTacticsChange}>
+        <select
+          name="tactics"
+          onChange={handleTacticsChange}
+          value={tacticsName}
+        >
           {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
           <option value="" />
           <option value="weakest">weakest</option>

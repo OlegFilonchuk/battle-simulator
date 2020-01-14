@@ -38,7 +38,10 @@ export default class Squad {
   attack(): void {
     if (!this.target?.isActive || !this.isActive) return;
 
-    if (this.attackSuccess < this.target.attackSuccess) return;
+    const prob1 = this.attackSuccess;
+    const prob2 = this.target.attackSuccess;
+
+    if (prob1 < prob2) return;
 
     this.members.forEach((item) => item.attack());
     this.target.getAttacked(this.damage);
