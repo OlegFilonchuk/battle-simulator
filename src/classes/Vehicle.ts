@@ -1,3 +1,4 @@
+import { computed } from 'mobx';
 import Unit from './Unit';
 import { average, geometricAverage, random, sum } from '../utils/helpers';
 import Soldier from './Soldier';
@@ -16,7 +17,7 @@ export default class Vehicle extends Unit {
     }
   }
 
-  public get isActive(): boolean {
+  @computed public get isActive(): boolean {
     return this.health > 0 && this.operators.some((item) => item.isActive);
   }
 
@@ -35,7 +36,7 @@ export default class Vehicle extends Unit {
     ).toFixed(2);
   }
 
-  public get damage(): number {
+  @computed public get damage(): number {
     return this.isActive
       ? +(
           0.1 + sum(this.operators.map((item) => item.experience / 100))
@@ -60,7 +61,7 @@ export default class Vehicle extends Unit {
       return;
     }
 
-    const lastDamage = (damage * 0.2) / this.operators.length;
+    const lastDamage: number = (damage * 0.2) / this.operators.length;
     this.operators.forEach((item) => item.getAttacked(lastDamage));
     this.operators[random(0, this.operators.length - 1)].getAttacked(
       damage * 0.2,

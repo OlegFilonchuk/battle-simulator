@@ -5,14 +5,10 @@ import React, {
   MouseEvent,
   ReactElement,
 } from 'react';
-import { connect } from 'react-redux';
-import { ActionCreator } from 'redux';
-import { ArmyCreateAction, armyCreateAction } from '../../state/armyAC';
 import SquadForm from '../Squad/SquadForm';
 import Army from '../../classes/Army';
 
 type Props = {
-  createArmy: ActionCreator<ArmyCreateAction>;
   armies: Army[];
 };
 
@@ -93,11 +89,11 @@ class ArmyForm extends Component<Props, State> {
 
   handleArmyCreate: EventHandler<MouseEvent<HTMLButtonElement>> = (ev) => {
     ev.preventDefault();
-    const { createArmy, armies } = this.props;
+    const { armies } = this.props;
     const { armyName, squadState } = this.state;
 
     if (!armyName || armies.map((item) => item.name).includes(armyName)) return;
-    createArmy(armyName, squadState);
+    armies.push(new Army(armyName, squadState));
 
     this.setState({
       armyName: '',
@@ -151,9 +147,4 @@ class ArmyForm extends Component<Props, State> {
   }
 }
 
-export default connect(
-  ({ armies }) => ({
-    armies,
-  }),
-  { createArmy: armyCreateAction },
-)(ArmyForm);
+export default ArmyForm;

@@ -1,10 +1,11 @@
+import { computed, observable } from 'mobx';
 import Unit from './Unit';
 import { random } from '../utils/helpers';
 
 export default class Soldier extends Unit {
-  private _experience = 0;
+  @observable private _experience = 0;
 
-  public get experience(): number {
+  @computed public get experience(): number {
     return this._experience;
   }
 
@@ -12,7 +13,7 @@ export default class Soldier extends Unit {
     this._experience = value >= 50 ? 50 : value;
   }
 
-  public get isActive(): boolean {
+  @computed public get isActive(): boolean {
     return this.health > 0;
   }
 
@@ -25,7 +26,7 @@ export default class Soldier extends Unit {
     ).toFixed(2);
   }
 
-  public get damage(): number {
+  @computed public get damage(): number {
     return this.isActive ? +(0.05 + this.experience / 100).toFixed(2) : 0;
   }
 

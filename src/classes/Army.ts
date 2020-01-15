@@ -1,3 +1,4 @@
+import { computed, observable } from 'mobx';
 import { Tactics } from '../utils/types';
 import Squad from './Squad';
 
@@ -6,7 +7,7 @@ export default class Army {
 
   public squads: Squad[] = [];
 
-  public target: Army;
+  @observable public target: Army;
 
   public tactics: Tactics = 'random';
 
@@ -15,7 +16,7 @@ export default class Army {
     this.squads = squadState.map((item) => new Squad(item));
   }
 
-  public get isActive(): boolean {
+  @computed public get isActive(): boolean {
     return this.squads.some((item) => item.isActive);
   }
 

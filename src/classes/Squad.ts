@@ -1,3 +1,4 @@
+import { computed } from 'mobx';
 import { geometricAverage, random, sum } from '../utils/helpers';
 import Soldier from './Soldier';
 import Vehicle from './Vehicle';
@@ -16,11 +17,11 @@ export default class Squad {
     }
   }
 
-  public get isActive(): boolean {
+  @computed public get isActive(): boolean {
     return this.members.some((item) => item.isActive);
   }
 
-  public get attackSuccess(): number {
+  private get attackSuccess(): number {
     const membersAlive: (Soldier | Vehicle)[] = this.members.filter(
       (item) => item.isActive,
     );
@@ -29,7 +30,7 @@ export default class Squad {
     ).toFixed(2);
   }
 
-  public get damage(): number {
+  @computed public get damage(): number {
     return this.isActive
       ? +sum(this.members.map((item) => item.damage)).toFixed(2)
       : 0;

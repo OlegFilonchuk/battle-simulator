@@ -1,16 +1,12 @@
 import React, { EventHandler, FC, MouseEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
+import { observer } from 'mobx-react';
 import ArmyList from './components/Army/ArmyList';
-import { armyUpdateAction } from './state/armyAC';
 import Army from './classes/Army';
 import ArmyForm from './components/Army/ArmyForm';
-import armiesSelector from './state/selectors';
+import store from './mobxStore';
 
-const App: FC = () => {
-  const armies: Army[] = useSelector(armiesSelector);
-
-  const dispatch: Dispatch = useDispatch();
+const App: FC = observer(() => {
+  const { armies } = store;
 
   const hasWinner: () => boolean | Army = () =>
     armies.filter((item) => item.isActive).length <= 1
@@ -24,18 +20,17 @@ const App: FC = () => {
   const handleFight: EventHandler<MouseEvent<HTMLButtonElement>> = () => {
     const int = setInterval(() => {
       armies.forEach((item) => item.attack());
-      dispatch(armyUpdateAction());
       if (hasWinner()) clearInterval(int);
     }, 10);
+
     // while (!hasWinner()) {
     //   armies.forEach((item) => item.attack());
     // }
-    // dispatch(armyUpdateAction());
   };
 
   return (
     <div>
-      <ArmyForm />
+      <ArmyForm armies={armies} />
 
       <button type="button" onClick={handleFight} disabled={!checkPassed()}>
         fight
@@ -46,6 +41,6 @@ const App: FC = () => {
       <ArmyList armies={armies} />
     </div>
   );
-};
+});
 
 export default App;

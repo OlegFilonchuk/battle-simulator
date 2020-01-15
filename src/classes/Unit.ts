@@ -1,9 +1,10 @@
+import { computed, observable } from 'mobx';
 import { random } from '../utils/helpers';
 
 export default abstract class Unit {
-  private _health = 100;
+  @observable private _health = 100;
 
-  public get health(): number {
+  @computed public get health(): number {
     return +this._health.toFixed(2);
   }
 
