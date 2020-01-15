@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import SquadForm from '../Squad/SquadForm';
 import Army from '../../classes/Army';
+import store from '../../mobxStore';
 
 type Props = {
   armies: Army[];
@@ -93,7 +94,7 @@ class ArmyForm extends Component<Props, State> {
     const { armyName, squadState } = this.state;
 
     if (!armyName || armies.map((item) => item.name).includes(armyName)) return;
-    armies.push(new Army(armyName, squadState));
+    store.addArmy(armyName, squadState);
 
     this.setState({
       armyName: '',

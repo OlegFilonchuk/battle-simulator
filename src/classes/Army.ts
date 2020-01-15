@@ -1,11 +1,11 @@
-import { computed, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 import { Tactics } from '../utils/types';
 import Squad from './Squad';
 
 export default class Army {
   public name: string;
 
-  public squads: Squad[] = [];
+  @observable public squads: Squad[] = [];
 
   @observable public target: Army;
 
@@ -13,7 +13,7 @@ export default class Army {
 
   constructor(name: string, squadState: number[]) {
     this.name = name;
-    this.squads = squadState.map((item) => new Squad(item));
+    squadState.forEach((item) => this.addSquad(item));
   }
 
   @computed public get isActive(): boolean {
@@ -45,5 +45,9 @@ export default class Army {
       : Math.random() < 0.5
       ? weakest
       : strongest;
+  }
+
+  @action private addSquad(membersCount: number): void {
+    this.squads.push(new Squad(membersCount));
   }
 }
