@@ -20,7 +20,7 @@ export default class Army {
     return this.squads.some((item) => item.isActive);
   }
 
-  attack(): void {
+  public attack(): void {
     if (!this.tactics || !this.target) return;
 
     this.squads.forEach((item) => {
@@ -29,7 +29,7 @@ export default class Army {
     });
   }
 
-  defineTarget(tactics: Tactics): Squad {
+  public defineTarget(enemyTactics: Tactics): Squad {
     const strongest: Squad = this.squads
       .filter((item) => item.isActive)
       .sort((a, b) => b.damage - a.damage)[0];
@@ -38,9 +38,9 @@ export default class Army {
       .filter((item) => item.isActive)
       .sort((a, b) => a.damage - b.damage)[0];
 
-    return tactics === 'weakest'
+    return enemyTactics === 'weakest'
       ? weakest
-      : tactics === 'strongest'
+      : enemyTactics === 'strongest'
       ? strongest
       : Math.random() < 0.5
       ? weakest
