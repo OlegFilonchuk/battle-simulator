@@ -94,7 +94,7 @@ class ArmyForm extends Component<Props, State> {
     const { armyName, squadState } = this.state;
 
     if (!armyName || armies.map((item) => item.name).includes(armyName)) return;
-    store.addArmy(armyName, squadState);
+    store.battle.addArmy(armyName, squadState);
 
     this.setState({
       armyName: '',

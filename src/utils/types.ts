@@ -1,8 +1,7 @@
-import Army from '../classes/Army';
+import Battle from '../classes/Battle';
 
 export type StoreState = {
-  armies: Army[];
-  addArmy(armyName: string, squadState: number[]): void;
+  battle: Battle;
 };
 
 export type Tactics = 'weakest' | 'strongest' | 'random';

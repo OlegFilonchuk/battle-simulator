@@ -17,7 +17,7 @@ type Props = {
 
 const ArmyComp: FC<Props> = observer(
   ({ army: { squads, name, isActive, tactics } }) => {
-    const { armies } = store;
+    const { armies } = store.battle;
 
     const [targetName, setTargetName] = useState('');
     const [tacticsName, setTacticsName] = useState(tactics);

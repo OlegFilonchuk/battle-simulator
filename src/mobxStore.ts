@@ -1,12 +1,10 @@
 import { observable } from 'mobx';
 import { StoreState } from './utils/types';
-import Army from './classes/Army';
+import Battle from './classes/Battle';
 
+const battle: Battle = new Battle();
 const store: StoreState = observable.object({
-  armies: [],
-  addArmy(armyName: string, squadState: number[]): void {
-    this.armies.push(new Army(armyName, squadState));
-  },
+  battle,
 });
 
 export default store;

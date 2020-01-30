@@ -6,7 +6,7 @@ import ArmyForm from './components/Army/ArmyForm';
 import store from './mobxStore';
 
 const App: FC = observer(() => {
-  const { armies } = store;
+  const { armies } = store.battle;
 
   const hasWinner: () => boolean | Army = () =>
     armies.filter((item) => item.isActive).length <= 1

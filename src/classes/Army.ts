@@ -13,11 +13,11 @@ export default class Army {
 
   constructor(name: string, squadState: number[]) {
     this.name = name;
-    squadState.forEach((item) => this.addSquad(item));
+    squadState.forEach((item: number) => this.addSquad(item));
   }
 
   @computed public get isActive(): boolean {
-    return this.squads.some((item) => item.isActive);
+    return this.squads.some((item: Squad) => item.isActive);
   }
 
   public attack(): void {
@@ -31,12 +31,12 @@ export default class Army {
 
   public defineTarget(enemyTactics: Tactics): Squad {
     const strongest: Squad = this.squads
-      .filter((item) => item.isActive)
+      .filter((item: Squad) => item.isActive)
       .sort((a, b) => b.damage - a.damage)[0];
 
     const weakest: Squad = this.squads
-      .filter((item) => item.isActive)
-      .sort((a, b) => a.damage - b.damage)[0];
+      .filter((item: Squad) => item.isActive)
+      .sort((a: Squad, b: Squad) => a.damage - b.damage)[0];
 
     return enemyTactics === 'weakest'
       ? weakest
