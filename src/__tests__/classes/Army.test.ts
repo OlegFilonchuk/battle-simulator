@@ -4,9 +4,14 @@ import Soldier from '../../classes/Soldier';
 import Vehicle from '../../classes/Vehicle';
 
 describe('Army', () => {
+  let army;
   const name = 'testArmy';
   const squadState: number[] = [5, 5, 6, 7];
-  const army: Army = new Army(name, squadState);
+
+  beforeEach(() => {
+    army = new Army(name, squadState);
+  });
+
   it('should create the right amount of squads', () => {
     expect(army.squads.length).toEqual(squadState.length);
   });
